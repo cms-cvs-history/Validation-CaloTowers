@@ -4,7 +4,7 @@
     SealPluginRefresh
 
 
-    root  -q hcaloval.C\(\"HB\"\)
-    root  -q hcaloval.C\(\"HE\"\)
-    root  -q hcaloval.C\(\"HF\"\)
+    root  -q HcalOval.C\(\"HB\",\"gif\"\)
+    root  -q HcalOval.C\(\"HE\",\"gif\"\)
+    root  -q HcalOval.C\(\"HF\",\"gif\"\)
  
