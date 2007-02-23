@@ -39,16 +39,38 @@
      untracked bool   debugFlag     = true
   }
 
-  service = MessageLogger { }
+  ### service = MessageLogger { }
+   service = MessageLogger
+   {
+      untracked vstring destinations = {"cout"} 
+      untracked vstring categories = { "FwkJob", "SimG4CoreApplication" } 
+      untracked PSet cout =
+      {
+         untracked PSet default = { untracked int32 limit = 0 }  # kill all messages in the log
+         untracked PSet FwkJob  = { untracked int32 limit = -1 } # but FwkJob category - those unlimitted
+         untracked PSet SimG4CoreApplication  = { untracked int32 limit = -1 } # and also SimG4CoreApplication
+      } 
+   }
+   
 
   service = DaqMonitorROOTBackEnd{ }
 
-include "Configuration/JetMET/data/calorimetry-digitization.cff"
+#include "Configuration/JetMET/data/calorimetry-digitization.cff"
 
-include "Configuration/JetMET/data/calorimetry-reconstruction.cff"
-sequence caloRecoSeq = { ecalLocalRecoSequence & hbhereco & hfreco & horeco }
+include "SimGeneral/MixingModule/data/mixNoPU.cfi"
+include "SimCalorimetry/Configuration/data/SimCalorimetry.cff"
 
-include "Configuration/JetMET/data/calorimetry-caltowers.cff"
+include "Configuration/StandardSequences/data/FakeConditions.cff"
+
+##include "Configuration/JetMET/data/calorimetry-reconstruction.cff"
+
+include "RecoLocalCalo/Configuration/data/RecoLocalCalo.cff"
+
+#sequence caloRecoSeq = { ecalLocalRecoSequence & hbhereco & hfreco & horeco }
+sequence caloRecoSeq = { calolocalreco }
+
+#include "Configuration/JetMET/data/calorimetry-caltowers.cff"
+include "RecoJets/Configuration/data/RecoJets.cff"
 
   module hcalDigiAnalyzer = HcalDigiTester{
         untracked string outputFile = 'HcalDigisValidationHE.root'
@@ -70,6 +92,6 @@ module hcalRecoAnalyzer = HcalRecHitsValidation{
 }
 
 
-##path p = {VtxSmeared,g4SimHits ,caloDigi, caloRecoSeq,hcalRecoAnalyzer, caloTowersRec,hcalTowerAnalyzer  }
+##path p = {VtxSmeared,g4SimHits ,caloDigi, caloRecoSeq, hcalRecoAnalyzer, caloTowersRec, hcalTowerAnalyzer  }
 
 
