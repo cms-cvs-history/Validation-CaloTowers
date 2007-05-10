@@ -1,45 +1,18 @@
-############# Simulation ###################
- 
- 
 
-   include "SimG4Core/Application/data/SimG4Object.cfi"
-
-     
-
-       service = RandomNumberGeneratorService {
-                untracked uint32 sourceSeed = 135799753
-                PSet moduleSeeds =
-                {
-                        untracked uint32 VtxSmeared = 123456789
-         untracked uint32 g4SimHits = 9876
-                }
-        }
-
-
-      module VtxSmeared = VertexGenerator {
-                string type = "IOMC/EventVertexGenerators/GaussianEventVertexGenerator"
-                double MeanX = 0.
-                double MeanY = 0.
-                double MeanZ = 0.
-                double SigmaX = 0.0001
-                double SigmaY = 0.0001
-                double SigmaZ = 0.0001  // in mm (as in COBRA/OSCAR)
-        }
-
-#include "Validation/HcalHits/test/data/testGeometryXML.cfi"
-
-###############END OF Simulation #######################
-
+ include "Configuration/StandardSequences/data/VtxSmearedGauss.cff"
+ include "Configuration/StandardSequences/data/Simulation.cff"
+ include "Configuration/StandardSequences/data/MixingNoPileUp.cff"
+ include "Configuration/StandardSequences/data/FakeConditions.cff"
+ include "Configuration/StandardSequences/data/Reconstruction.cff"
 
    source = PoolSource {
      untracked vstring fileNames =
-{'file:/localscratch/dkonst/CMSSW_1_3_0_pre1_25_01_2007/CMSSW_1_2_0/src/Validation/HcalHits/test/simevent_HB.root'}
-     untracked int32 maxEvents = 10
+	{'file:/localscratch/dkonst/CMSSW_1_3_0_pre1_25_01_2007/CMSSW_1_2_0/src/Validation/HcalHits/test/simevent_HB.root'}
      untracked uint32 debugVebosity = 10
      untracked bool   debugFlag     = true
   }
 
-  ### service = MessageLogger { }
+#  service = MessageLogger { }
    service = MessageLogger
    {
       untracked vstring destinations = {"cout"} 
@@ -51,47 +24,31 @@
          untracked PSet SimG4CoreApplication  = { untracked int32 limit = -1 } # and also SimG4CoreApplication
       } 
    }
-   
+  service = RandomNumberGeneratorService
+    {
+      untracked uint32 sourceSeed = 123456789
+      PSet moduleSeeds =
+      {
+         untracked uint32 VtxSmeared = 98765432
+         untracked uint32 g4SimHits  = 11
+         untracked uint32 mix        = 12345
+      }
+    }
 
   service = DaqMonitorROOTBackEnd{ }
-
-#include "Configuration/JetMET/data/calorimetry-digitization.cff"
-
-include "SimGeneral/MixingModule/data/mixNoPU.cfi"
-include "SimCalorimetry/Configuration/data/SimCalorimetry.cff"
-
-include "Configuration/StandardSequences/data/FakeConditions.cff"
-
-##include "Configuration/JetMET/data/calorimetry-reconstruction.cff"
-
-include "RecoLocalCalo/Configuration/data/RecoLocalCalo.cff"
-
-#sequence caloRecoSeq = { ecalLocalRecoSequence & hbhereco & hfreco & horeco }
-sequence caloRecoSeq = { calolocalreco }
-
-#include "Configuration/JetMET/data/calorimetry-caltowers.cff"
-include "RecoJets/Configuration/data/RecoJets.cff"
 
   module hcalDigiAnalyzer = HcalDigiTester{
         untracked string outputFile = 'HcalDigisValidationHE.root'
         untracked string hcalselector   = 'HE'
-        untracked bool subpedvalue      = false
   }
 
-
-
-module hcalTowerAnalyzer = CaloTowersValidation{
+  module hcalTowerAnalyzer = CaloTowersValidation{
      untracked string outputFile = 'CaloTowersHE.root'
      untracked string CaloTowerCollectionLabel = 'towerMaker'		
      untracked string hcalselector   = 'HO'	
-}
+  }
 
-module hcalRecoAnalyzer = HcalRecHitsValidation{
+  module hcalRecoAnalyzer = HcalRecHitsValidation{
      untracked string outputFile = 'HcalRecHitsValidationHB.root'
      untracked string hcalselector   = 'HB'
-}
-
-
-##path p = {VtxSmeared,g4SimHits ,caloDigi, caloRecoSeq, hcalRecoAnalyzer, caloTowersRec, hcalTowerAnalyzer  }
-
-
+  }
