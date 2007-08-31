@@ -1,29 +1,14 @@
-
  include "Configuration/StandardSequences/data/VtxSmearedGauss.cff"
  include "Configuration/StandardSequences/data/Simulation.cff"
  include "Configuration/StandardSequences/data/MixingNoPileUp.cff"
  include "Configuration/StandardSequences/data/FakeConditions.cff"
  include "Configuration/StandardSequences/data/Reconstruction.cff"
 
-   source = PoolSource {
-     untracked vstring fileNames =
-	{'file:/localscratch/dkonst/CMSSW_1_3_0_pre1_25_01_2007/CMSSW_1_2_0/src/Validation/HcalHits/test/simevent_HB.root'}
-     untracked uint32 debugVebosity = 10
-     untracked bool   debugFlag     = true
-  }
+  untracked PSet maxEvents = {untracked int32 input = -1}
 
-#  service = MessageLogger { }
-   service = MessageLogger
-   {
-      untracked vstring destinations = {"cout"} 
-      untracked vstring categories = { "FwkJob", "SimG4CoreApplication" } 
-      untracked PSet cout =
-      {
-         untracked PSet default = { untracked int32 limit = 0 }  # kill all messages in the log
-         untracked PSet FwkJob  = { untracked int32 limit = -1 } # but FwkJob category - those unlimitted
-         untracked PSet SimG4CoreApplication  = { untracked int32 limit = -1 } # and also SimG4CoreApplication
-      } 
-   }
+  service = MessageLogger { }
+  service = DaqMonitorROOTBackEnd{ }
+
   service = RandomNumberGeneratorService
     {
       untracked uint32 sourceSeed = 123456789
@@ -31,24 +16,76 @@
       {
          untracked uint32 VtxSmeared = 98765432
          untracked uint32 g4SimHits  = 11
-         untracked uint32 mix        = 12345
+         untracked uint32 mix        = 1234  
+         untracked uint32 ecalUnsuppressedDigis = 43434
+         untracked uint32 hcalDigis = 43434
       }
     }
 
-  service = DaqMonitorROOTBackEnd{ }
-
-  module hcalDigiAnalyzer = HcalDigiTester{
-        untracked string outputFile = 'HcalDigisValidationHE.root'
-        untracked string hcalselector   = 'HE'
+  source = PoolSource {
+     untracked vstring fileNames =
+	{'file:/afs/cern.ch/cms/data/CMSSW/Validation/HcalHits/data/1_4_x/mc_pi+100_etaphi44.root'}
+     untracked uint32 debugVebosity = 10
+     untracked bool   debugFlag     = true
   }
 
-  module hcalTowerAnalyzer = CaloTowersValidation{
-     untracked string outputFile = 'CaloTowersHE.root'
-     untracked string CaloTowerCollectionLabel = 'towerMaker'		
-     untracked string hcalselector   = 'HO'	
+
+replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
+   vstring geomXMLFiles = {
+       "Geometry/CMSCommonData/data/materials.xml",
+       "Geometry/CMSCommonData/data/rotations.xml",
+       "Geometry/HcalCommonData/data/hcalrotations.xml",
+       "Geometry/HcalCommonData/data/hcalforwardmaterial.xml",
+       "Geometry/CMSCommonData/data/cms.xml",
+       "Geometry/CMSCommonData/data/cmsMother.xml",
+       "Geometry/CMSCommonData/data/muonBase.xml",
+       "Geometry/CMSCommonData/data/cmsMuon.xml",
+       "Geometry/CMSCommonData/data/mgnt.xml",
+       "Geometry/CMSCommonData/data/muonMagnet.xml",
+       "Geometry/CMSCommonData/data/muonMB.xml",
+               "Geometry/CMSCommonData/data/caloBase.xml",
+               "Geometry/CMSCommonData/data/cmsCalo.xml",
+       "Geometry/HcalCommonData/data/hcalalgo.xml",
+       "Geometry/EcalCommonData/data/ecal.xml",
+       "Geometry/HcalCommonData/data/hcalbarrelalgo.xml",
+       "Geometry/HcalCommonData/data/hcalendcapalgo.xml",
+       "Geometry/HcalCommonData/data/hcalouteralgo.xml",
+       "Geometry/HcalCommonData/data/hcalforwardalgo.xml",
+       "Geometry/EcalSimData/data/ecalsens.xml",
+       "Geometry/HcalCommonData/data/hcalsens.xml",
+       "Geometry/HcalSimData/data/CaloUtil.xml",
+       "Geometry/EcalSimData/data/EcalProdCuts.xml",
+       "Geometry/HcalSimData/data/HcalProdCuts.xml"
+   }
+   string rootNodeName = "cms:OCMS"
+}
+
+        #Vertex
+	replace VtxSmeared.SigmaX = 0.00001
+	replace VtxSmeared.SigmaY = 0.00001
+	replace VtxSmeared.SigmaZ = 0.00001
+
+	#Magnetic Field 		
+	replace g4SimHits.UseMagneticField = false
+
+
+###-Ananlysers 
+
+  module hcalDigiAnalyzer = HcalDigiTester{
+        untracked string outputFile = 'HcalDigisValidationHB.root'
+        untracked string hcalselector   = 'HB'
   }
 
   module hcalRecoAnalyzer = HcalRecHitsValidation{
      untracked string outputFile = 'HcalRecHitsValidationHB.root'
      untracked string hcalselector   = 'HB'
+     untracked string ecalselector   = 'yes'
+     untracked string eventype       = 'single'
   }
+
+  module hcalTowerAnalyzer = CaloTowersValidation{
+     untracked string outputFile = 'CaloTowersValidationHB.root'
+     untracked string CaloTowerCollectionLabel = 'towerMaker'		
+     untracked string hcalselector   = 'HB'	
+  }
+
