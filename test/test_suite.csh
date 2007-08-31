@@ -4,14 +4,26 @@
     SealPluginRefresh
         
     rm *.xml*
-    if ( -e outputCaloTowersHBnoise.log ) rm outputCaloTowersHBnoise.log
+    if ( -e outputCaloTowersHB.log ) rm outputCaloTowersHB.log
 
-    if ( -e outputCaloTowersHEnoise.log ) rm outputCaloTowersHEnoise.log
+    if ( -e outputCaloTowersHE.log ) rm outputCaloTowersHE.log
 
-    if ( -e outputCaloTowersHFnoise.log ) rm outputCaloTowersHFnoise.log
+    if ( -e outputCaloTowersHF.log ) rm outputCaloTowersHF.log
 
-    cmsRun --parameter-set runHBnoise.cfg >& outputCaloTowersHBnoise.log
+    if ( -e outputCaloTowersHF_gamma.log ) rm outputCaloTowersHF_gamma.log
 
-    cmsRun --parameter-set runHEnoise.cfg >& outputCaloTowersHEnoise.log
+    if ( -e outputCaloTowersHO.log ) rm outputCaloTowersHO.log
 
-    cmsRun --parameter-set runHFnoise.cfg >& outputCaloTowersHFnoise.log
+    if ( -e outputCaloTowersALL.log ) rm outputCaloTowersALL.log
+
+    cmsRun --parameter-set runHB.cfg >& outputCaloTowersHB.log &
+
+    cmsRun --parameter-set runHE.cfg >& outputCaloTowersHE.log &
+
+    cmsRun --parameter-set runHF.cfg >& outputCaloTowersHF.log &
+
+    cmsRun --parameter-set runHF_gamma.cfg >& outputCaloTowersHF_gamma.log &
+
+    cmsRun --parameter-set runHO.cfg >& outputCaloTowersHO.log &
+
+    cmsRun --parameter-set runALL.cfg >& outputCaloTowersALL.log &
