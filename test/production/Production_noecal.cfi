@@ -1,5 +1,11 @@
  include "Configuration/StandardSequences/data/VtxSmearedGauss.cff"
- include "Configuration/StandardSequences/data/Simulation.cff"
+
+### include "Configuration/StandardSequences/data/Simulation.cff"
+
+   include "SimG4Core/Application/data/g4SimHits.cfi"
+   include "SimCalorimetry/HcalSimProducers/data/hcalUnsuppressedDigis.cfi"
+   include "SimCalorimetry/HcalZeroSuppressionProducers/data/hcalDigis.cfi"
+
  include "Configuration/StandardSequences/data/MixingNoPileUp.cff"
  include "Configuration/StandardSequences/data/FakeConditions.cff"
  include "Configuration/StandardSequences/data/Reconstruction.cff"
@@ -58,6 +64,9 @@ replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
    }
    string rootNodeName = "cms:OCMS"
 }
+
+replace CaloGeometryBuilder.SelectedCalos = {"HCAL"} 
+
 
         #Vertex
 	replace VtxSmeared.SigmaX = 0.00001
