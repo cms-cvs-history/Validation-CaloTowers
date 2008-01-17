@@ -4,7 +4,7 @@
  include "Configuration/StandardSequences/data/FakeConditions.cff"
  include "Configuration/StandardSequences/data/Reconstruction.cff"
 
-  untracked PSet maxEvents = {untracked int32 input = 1}
+  untracked PSet maxEvents = {untracked int32 input = -1}
 
   service = MessageLogger { }
   service = DaqMonitorROOTBackEnd{ } 
