@@ -1,0 +1,108 @@
+ include "Configuration/StandardSequences/data/VtxSmearedGauss.cff"
+
+ include "SimG4Core/Application/data/g4SimHits.cfi"
+ include "SimCalorimetry/HcalSimProducers/data/hcalUnsuppressedDigis.cfi"
+ include "SimCalorimetry/HcalZeroSuppressionProducers/data/hcalDigis.cfi"
+
+ include "Configuration/StandardSequences/data/MixingNoPileUp.cff"
+ include "Configuration/StandardSequences/data/FakeConditions.cff"
+ include "Configuration/StandardSequences/data/Reconstruction.cff"
+
+
+  service = MessageLogger { }
+  service = DaqMonitorROOTBackEnd{ }
+
+  service = RandomNumberGeneratorService
+    {
+      untracked uint32 sourceSeed = 123456789
+      PSet moduleSeeds =
+      {
+         untracked uint32 VtxSmeared = 98765432
+         untracked uint32 g4SimHits  = 11
+         untracked uint32 mix        = 1234  
+         untracked uint32 ecalUnsuppressedDigis = 43434
+         untracked uint32 hcalUnsuppressedDigis = 43434
+      }
+    }
+
+  source = PoolSource {
+     untracked vstring fileNames =
+	{'file:/afs/cern.ch/cms/data/CMSSW/Validation/HcalHits/data/1_4_x/mc_pi+100_etaphi44.root'}
+     untracked uint32 debugVebosity = 10
+     untracked bool   debugFlag     = true
+  }
+
+
+replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
+   vstring geomXMLFiles = {
+       "Geometry/CMSCommonData/data/materials.xml",
+       "Geometry/CMSCommonData/data/rotations.xml",
+       "Geometry/HcalCommonData/data/hcalrotations.xml",
+       "Geometry/HcalCommonData/data/hcalforwardmaterial.xml",
+       "Geometry/CMSCommonData/data/normal/cmsextent.xml",
+       "Geometry/CMSCommonData/data/cms.xml",
+       "Geometry/CMSCommonData/data/cmsMother.xml",
+       "Geometry/CMSCommonData/data/muonBase.xml",
+       "Geometry/CMSCommonData/data/cmsMuon.xml",
+       "Geometry/CMSCommonData/data/mgnt.xml",
+       "Geometry/CMSCommonData/data/muonMagnet.xml",
+       "Geometry/CMSCommonData/data/muonMB.xml",
+       "Geometry/CMSCommonData/data/caloBase.xml",
+       "Geometry/CMSCommonData/data/cmsCalo.xml",
+       "Geometry/HcalCommonData/data/hcalalgo.xml",
+       "Geometry/HcalCommonData/data/hcalbarrelalgo.xml",
+       "Geometry/HcalCommonData/data/hcalendcapalgo.xml",
+       "Geometry/HcalCommonData/data/hcalouteralgo.xml",
+       "Geometry/HcalCommonData/data/hcalforwardalgo.xml",
+       "Geometry/HcalCommonData/data/hcalforwardfibre.xml",
+       "Geometry/HcalCommonData/data/hcalsens.xml",
+       "Geometry/HcalSimData/data/CaloUtil.xml",
+       "Geometry/HcalSimData/data/HcalProdCuts.xml"
+   }
+   string rootNodeName = "cms:OCMS"
+}
+
+replace CaloGeometryBuilder.SelectedCalos = {"HCAL"} 
+
+
+
+#--- Vertex
+	replace VtxSmeared.SigmaX = 0.00001
+	replace VtxSmeared.SigmaY = 0.00001
+	replace VtxSmeared.SigmaZ = 0.00001
+
+
+#--- Magnetic Field 		
+	replace g4SimHits.UseMagneticField = false
+
+
+#--- propagate hcalUnsuppressedDigis to Reco (if required)
+#     replace hbhereco.digiLabel = hcalUnsuppressedDigis
+#     replace horeco.digiLabel   = hcalUnsuppressedDigis
+#     replace hfreco.digiLabel   = hcalUnsuppressedDigis
+
+
+#--- Ananlysers 
+
+  module hcalDigiAnalyzer = HcalDigiTester{
+     untracked string outputFile = 'HcalDigisValidationHF.root'
+     untracked string hcalselector   = 'HF'
+     untracked bool subpedvalue = true
+     InputTag digiLabel = hcalDigis   ### hcalUnsuppressedDigis 
+  }
+
+  module hcalRecoAnalyzer = HcalRecHitsValidation{
+     untracked string outputFile = 'HcalRecHitsValidationHB.root'
+     untracked string hcalselector   = 'HF'
+     untracked string ecalselector   = 'no'
+     untracked string eventype       = 'single'
+     untracked string sign           = '*'
+     untracked string mc             = 'yes'
+  }
+
+  module hcalTowerAnalyzer = CaloTowersValidation{
+     untracked string outputFile = 'CaloTowersValidationHB.root'
+     untracked string CaloTowerCollectionLabel = 'towerMaker'		
+     untracked string hcalselector   = 'HB'	
+  }
+
