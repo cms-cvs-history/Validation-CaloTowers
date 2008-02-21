@@ -1,3 +1,4 @@
+   include "Configuration/StandardSequences/data/SimulationRandomNumberGeneratorSeeds.cff"
  include "Configuration/StandardSequences/data/Simulation.cff"
  include "Configuration/StandardSequences/data/MixingNoPileUp.cff"
  include "Configuration/StandardSequences/data/FakeConditions.cff"
@@ -16,17 +17,6 @@
 
   service = MessageLogger { }
   service = DaqMonitorROOTBackEnd{ }
-
-  service = RandomNumberGeneratorService
-    {
-      untracked uint32 sourceSeed = 123456789
-      PSet moduleSeeds =
-      {
-         untracked uint32 mix        = 1234
-         untracked uint32 ecalUnsuppressedDigis = 43434
-         untracked uint32 hcalUnsuppressedDigis = 43434
-      }
-    }
 
 
 module myanalyzer = CaloTowersValidation{
