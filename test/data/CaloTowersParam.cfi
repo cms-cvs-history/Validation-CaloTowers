@@ -1,0 +1,5 @@
+module calotowersAnalyzer = CaloTowersValidation{
+     untracked string outputFile = 'CaloTowersValidationHB.root'
+     untracked string CaloTowerCollectionLabel = 'towerMaker'
+     untracked string hcalselector   = 'HB'
+}
