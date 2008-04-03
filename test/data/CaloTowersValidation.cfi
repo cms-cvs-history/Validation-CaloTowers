@@ -16,7 +16,10 @@
   }
 
   service = MessageLogger { }
-  service = DaqMonitorROOTBackEnd{ }
+
+  include "DQMServices/Core/data/DQM.cfg"
+  replace DQM.collectorHost = ""
+
 
 
 module myanalyzer = CaloTowersValidation{

@@ -7,7 +7,9 @@
 
 
   service = MessageLogger { }
-  service = DaqMonitorROOTBackEnd{ }
+  include "DQMServices/Core/data/DQM.cfg"
+  replace DQM.collectorHost = ""
+
 
   source = PoolSource {
      untracked vstring fileNames =
@@ -16,13 +18,13 @@
      untracked bool   debugFlag     = true
   }
 
-
 replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
    vstring geomXMLFiles = {
        "Geometry/CMSCommonData/data/materials.xml",
        "Geometry/CMSCommonData/data/rotations.xml",
        "Geometry/HcalCommonData/data/hcalrotations.xml",
        "Geometry/HcalCommonData/data/hcalforwardmaterial.xml",
+       "Geometry/TrackerCommonData/data/trackermaterial.xml",
        "Geometry/CMSCommonData/data/normal/cmsextent.xml",
        "Geometry/CMSCommonData/data/cms.xml",
        "Geometry/CMSCommonData/data/cmsMother.xml",
@@ -39,10 +41,13 @@ replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
        "Geometry/EcalCommonData/data/ebcon.xml",
        "Geometry/EcalCommonData/data/ebrot.xml",
        "Geometry/EcalCommonData/data/eecon.xml",
+       "Geometry/EcalCommonData/data/escon.xml",
        "Geometry/EcalCommonData/data/eefixed.xml",
        "Geometry/EcalCommonData/data/eehier.xml",
        "Geometry/EcalCommonData/data/eealgo.xml",
        "Geometry/EcalCommonData/data/esalgo.xml",
+       "Geometry/EcalCommonData/data/eeF.xml",
+       "Geometry/EcalCommonData/data/eeB.xml",
        "Geometry/HcalCommonData/data/hcalbarrelalgo.xml",
        "Geometry/HcalCommonData/data/hcalendcapalgo.xml",
        "Geometry/HcalCommonData/data/hcalouteralgo.xml",
