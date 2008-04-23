@@ -3,8 +3,6 @@
  include "Configuration/StandardSequences/data/MixingNoPileUp.cff"
  include "Configuration/StandardSequences/data/FakeConditions.cff"
  include "Configuration/StandardSequences/data/Reconstruction.cff"
- include "Geometry/CaloEventSetup/data/CaloGeometry.cff"
- include "RecoLocalCalo/Configuration/data/hcalLocalReco.cff"
 
  untracked PSet maxEvents = {untracked int32 input = -1}
 
