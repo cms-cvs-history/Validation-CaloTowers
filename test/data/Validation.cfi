@@ -84,7 +84,7 @@ replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
      untracked string outputFile = 'HcalDigisValidationHF.root'
      untracked string hcalselector   = 'HF'
      untracked bool subpedvalue = true
-     InputTag digiLabel = hcalDigis   ### hcalUnsuppressedDigis 
+     InputTag digiLabel = simHcalDigis   ### simHcalUnsuppressedDigis 
   }
 
   module hcalRecoAnalyzer = HcalRecHitsValidation{
