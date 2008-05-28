@@ -69,3 +69,11 @@ replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
 	#Magnetic Field 		
 	replace g4SimHits.UseMagneticField = false
 
+#--- shortcut (no RAW in between)
+replace hbhereco.digiLabel = simHcalDigis
+replace horeco.digiLabel   = simHcalDigis
+replace hfreco.digiLabel   = simHcalDigis
+
+replace ecalPreshowerRecHit.ESdigiCollection     = simEcalPreshowerDigis
+replace ecalWeightUncalibRecHit.EBdigiCollection = simEcalDigis:ebDigis
+replace ecalWeightUncalibRecHit.EEdigiCollection = simEcalDigis:eeDigis

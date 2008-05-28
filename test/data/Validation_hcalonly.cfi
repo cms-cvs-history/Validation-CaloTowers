@@ -15,6 +15,8 @@
   include "DQMServices/Core/data/DQM.cfg"
   replace DQM.collectorHost = ""
 
+  untracked PSet maxEvents = {untracked int32 input = -1}
+
   source = PoolSource {
      untracked vstring fileNames =
 	{'file:/afs/cern.ch/cms/data/CMSSW/Validation/HcalHits/data/1_4_x/mc_pi+100_etaphi44.root'}
@@ -66,10 +68,10 @@ replace CaloGeometryBuilder.SelectedCalos = {"HCAL"}
 	replace g4SimHits.UseMagneticField = false
 
 
-#--- propagate hcalUnsuppressedDigis to Reco (if required)
-#     replace hbhereco.digiLabel = hcalUnsuppressedDigis
-#     replace horeco.digiLabel   = hcalUnsuppressedDigis
-#     replace hfreco.digiLabel   = hcalUnsuppressedDigis
+#--- force to used sim... 
+      replace hbhereco.digiLabel = simHcalDigis
+      replace horeco.digiLabel   = simHcalDigis
+      replace hfreco.digiLabel   = simHcalDigis
 
 
 #--- Ananlysers 
