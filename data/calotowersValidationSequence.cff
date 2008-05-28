@@ -1,0 +1,23 @@
+include "Validation/CaloTowers/data/CaloTowersParam.cfi"
+
+module HBCaloTowersValidation = calotowersAnalyzer from
+                             "Validation/CaloTowers/data/CaloTowersParam.cfi"
+replace HBCaloTowersValidation.hcalselector = "HB"
+replace HBCaloTowersValidation.outputFile = 'CaloTowersValidationHB.root'
+
+module HECaloTowersValidation = calotowersAnalyzer from
+                             "Validation/CaloTowers/data/CaloTowersParam.cfi"
+replace HECaloTowersValidation.hcalselector = "HE"
+replace HECaloTowersValidation.outputFile = 'CaloTowersValidationHE.root'
+
+module HFCaloTowersValidation = calotowersAnalyzer from
+                             "Validation/CaloTowers/data/CaloTowersParam.cfi"
+replace HFCaloTowersValidation.hcalselector = "HF"
+replace HFCaloTowersValidation.outputFile = 'CaloTowersValidationHF.root'
+
+module AllCaloTowersValidation = calotowersAnalyzer from
+                             "Validation/CaloTowers/data/CaloTowersParam.cfi"
+replace AllCaloTowersValidation.hcalselector = "All"
+replace AllCaloTowersValidation.outputFile = 'CaloTowersValidationAll.root'
+
+sequence calotowersValidationSequence = { HBCaloTowersValidation & HECaloTowersValidation & HFCaloTowersValidation & AllCaloTowersValidation }
