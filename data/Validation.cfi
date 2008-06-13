@@ -10,6 +10,7 @@
   include "DQMServices/Core/data/DQM.cfg"
   replace DQM.collectorHost = ""
 
+  untracked PSet maxEvents = {untracked int32 input = -1}
 
   source = PoolSource {
      untracked vstring fileNames =
@@ -72,10 +73,15 @@ replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
 	replace g4SimHits.UseMagneticField = false
 
 
-#--- propagate hcalUnsuppressedDigis to Reco (if required)
-#     replace hbhereco.digiLabel = hcalUnsuppressedDigis
-#     replace horeco.digiLabel   = hcalUnsuppressedDigis
-#     replace hfreco.digiLabel   = hcalUnsuppressedDigis
+#--- force to use sim...
+     replace hbhereco.digiLabel = simHcalDigis
+     replace horeco.digiLabel   = simHcalDigis
+     replace hfreco.digiLabel   = simHcalDigis
+
+replace ecalPreshowerRecHit.ESdigiCollection     = simEcalPreshowerDigis
+replace ecalWeightUncalibRecHit.EBdigiCollection = simEcalDigis:ebDigis
+replace ecalWeightUncalibRecHit.EEdigiCollection = simEcalDigis:eeDigis
+
 
 
 #--- Ananlysers 

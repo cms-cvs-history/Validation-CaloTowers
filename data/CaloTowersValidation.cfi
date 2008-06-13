@@ -18,6 +18,14 @@
   include "DQMServices/Core/data/DQM.cfg"
   replace DQM.collectorHost = ""
 
+#--- force to use sim...
+     replace hbhereco.digiLabel = simHcalDigis
+     replace horeco.digiLabel   = simHcalDigis
+     replace hfreco.digiLabel   = simHcalDigis
+
+replace ecalPreshowerRecHit.ESdigiCollection     = simEcalPreshowerDigis
+replace ecalWeightUncalibRecHit.EBdigiCollection = simEcalDigis:ebDigis
+replace ecalWeightUncalibRecHit.EEdigiCollection = simEcalDigis:eeDigis
 
 
 module myanalyzer = CaloTowersValidation{
@@ -26,6 +34,6 @@ module myanalyzer = CaloTowersValidation{
      untracked string hcalselector   = 'HB'	
 }
 
-path p = {mix, calDigi, ecalLocalRecoSequence, hbhereco, hfreco, horeco, caloTowersRec, myanalyzer }
+path p = {mix, calDigi, calolocalreco, caloTowersRec, myanalyzer }
 
 
