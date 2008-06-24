@@ -18,7 +18,7 @@
 
     if ( -e outputCaloTowersNoise_chain.log ) rm outputCaloTowersNoise_chain.log
 
-    cmsRun --parameter-set runHvalid_simhits_digis_rechits_towersB.cfg >& outputCaloTowersHB_chain.log &
+    cmsRun --parameter-set runHvalid_simhits_digis_rechits_towers.cfg >& outputCaloTowersHB_chain.log &
 
     cmsRun --parameter-set runHEvalid_simhits_digis_rechits_towers.cfg >& outputCaloTowersHE_chain.log &
 
@@ -30,5 +30,5 @@
 
     cmsRun --parameter-set runALLvalid_simhits_digis_rechits_towers.cfg >& outputCaloTowersALL_chain.log &
 
-    cmsRun --parameter-set runNoise_valid_simhits_digis_rechist_towers.cfg >& outputCaloTowersNoise_chain.log &
+    cmsRun --parameter-set runNoise_valid_simhits_digis_rechits.cfg >& outputCaloTowersNoise_chain.log &
  
