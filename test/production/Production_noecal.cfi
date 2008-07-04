@@ -1,6 +1,7 @@
  include "Configuration/StandardSequences/data/SimulationRandomNumberGeneratorSeeds.cff"
  include "Configuration/StandardSequences/data/VtxSmearedGauss.cff"
  include "Configuration/StandardSequences/data/Geometry.cff"
+ include "Configuration/StandardSequences/data/MagneticField.cff"
 
  include "SimG4Core/Application/data/g4SimHits.cfi"
  include "SimCalorimetry/HcalSimProducers/data/hcalUnsuppressedDigis.cfi"
@@ -20,6 +21,18 @@
      untracked uint32 debugVebosity = 10
      untracked bool   debugFlag     = true
   }
+
+        #Vertex
+	replace VtxSmeared.SigmaX = 0.00001
+	replace VtxSmeared.SigmaY = 0.00001
+	replace VtxSmeared.SigmaZ = 0.00001
+
+	#Magnetic Field 		
+	replace g4SimHits.UseMagneticField = false
+
+replace hbhereco.digiLabel = simHcalDigis
+replace horeco.digiLabel   = simHcalDigis
+replace hfreco.digiLabel   = simHcalDigis
 
 replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
    vstring geomXMLFiles = {
@@ -50,16 +63,3 @@ replace XMLIdealGeometryESSource = XMLIdealGeometryESSource{
    }
    string rootNodeName = "cms:OCMS"
 }
-
-        #Vertex
-	replace VtxSmeared.SigmaX = 0.00001
-	replace VtxSmeared.SigmaY = 0.00001
-	replace VtxSmeared.SigmaZ = 0.00001
-
-	#Magnetic Field 		
-	replace g4SimHits.UseMagneticField = false
-
-replace hbhereco.digiLabel = simHcalDigis
-replace horeco.digiLabel   = simHcalDigis
-replace hfreco.digiLabel   = simHcalDigis
-
