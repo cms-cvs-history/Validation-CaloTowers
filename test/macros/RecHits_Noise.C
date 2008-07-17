@@ -154,7 +154,7 @@
    for (int i = 0; i < Nhist1; i++){
 
      TCanvas *myc = new TCanvas("myc","",800,600);
-     //     gStyle->SetOptStat(1111);
+     gStyle->SetOptStat(1111);
      
      if(i <=4 )  gPad->SetLogy(1);
      else gPad->SetLogy(0);
@@ -162,7 +162,6 @@
      
      if(i <=4 )   f1_hist1[i]->SetStats(kTRUE);   // stat box  
      else  f1_hist1[i]->SetStats(kFALSE);
-     f2_hist1[i]->SetStats(kFALSE); 
      
      f1_hist1[i]->SetTitle("");
      f2_hist1[i]->SetTitle("");
@@ -187,15 +186,25 @@
      leg->AddEntry(f1_hist1[i],"CMSSW_206","l");
      leg->AddEntry(f2_hist1[i],"CMSSW_210pre6","l");
 
-     /*
-     if(i  >= 5 || i <= 8) {
-       f2_hist1[i]->Draw(""); // "stat"   
-       f1_hist1[i]->Draw("hist same");   
+
+     if (i<= 4) {
+       TPaveStats *ptstats = new TPaveStats(0.8,0.8,0.99,1.0,"brNDC");
+       ptstats->SetTextColor(41);
+       f1_hist1[i]->GetListOfFunctions()->Add(ptstats);
+       ptstats->SetParent(f1_hist1[i]->GetListOfFunctions());
+       TPaveStats *ptstats = new TPaveStats(0.8,0.6,0.99,0.8,"brNDC");
+       ptstats->SetTextColor(43);
+       f2_hist1[i]->GetListOfFunctions()->Add(ptstats);
+       ptstats->SetParent(f2_hist1[i]->GetListOfFunctions());
+       
+       f1_hist1[i]->Draw(""); // "stat"   
+       f2_hist1[i]->Draw("hist sames");   
      }
-     else { }
-     */
-     f1_hist1[i]->Draw(""); // "stat"   
-     f2_hist1[i]->Draw("hist same");   
+     else {
+       f1_hist1[i]->Draw(""); // "stat"   
+       f2_hist1[i]->Draw("hist same");   
+     }
+
     
      leg->Draw();   
 
