@@ -3,8 +3,8 @@
 
    TCanvas *myc = new TCanvas("myc","",800,600);
       
-   TFile f1("CaloTowersValidationHB_206.root");
-   TFile f2("CaloTowersValidationHB_210pre6.root");
+   TFile f1("CaloTowersValidationHF_206.root");
+   TFile f2("CaloTowersValidationHF_210pre6.root");
 
    
    // service variables
