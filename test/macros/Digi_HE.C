@@ -3,8 +3,8 @@
 
    TCanvas *myc = new TCanvas("myc","",800,600);
       
-   TFile f1("HcalRecHitValidationHE_206.root");
-   TFile f2("HcalRecHitValidationHE_210pre6.root");
+   TFile f1("HcalRecHitValidationHE_210pre6.root");
+   TFile f2("HcalRecHitValidationHE_210pre9.root");
 
    
    // service variables
@@ -90,6 +90,9 @@
 
    for (int i = 0; i < Nhist1; i++){
 
+     if(i <= 1 ) gPad->SetLogy(1);
+     else  gPad->SetLogy(0);
+
     f1_hist1[i]->SetStats(kFALSE);   
     f2_hist1[i]->SetStats(kFALSE); 
     
@@ -117,8 +120,8 @@
      leg->SetBorderSize(2);
      //  leg->SetFillColor(51); // see new color definition above
      leg->SetFillStyle(1001); //
-     leg->AddEntry(f1_hist1[i],"CMSSW_206","l");
-     leg->AddEntry(f2_hist1[i],"CMSSW_210pre6","l");
+     leg->AddEntry(f1_hist1[i],"CMSSW_210pre6","l");
+     leg->AddEntry(f2_hist1[i],"CMSSW_210pre9","l");
 
 
      f1_hist1[i]->Draw("hist");   
@@ -159,8 +162,8 @@
     TLegend *leg = new TLegend(0.68, 0.82, 0.98, 0.97, "","brNDC");    
      leg->SetBorderSize(2);
      leg->SetFillStyle(1001); 
-     leg->AddEntry(f1_hist2[i],"CMSSW_206","lp");
-     leg->AddEntry(f2_hist2[i],"CMSSW_210pre6","lp");
+     leg->AddEntry(f1_hist2[i],"CMSSW_210pre6","lp");
+     leg->AddEntry(f2_hist2[i],"CMSSW_210pre9","lp");
 
      leg->Draw();   
      
