@@ -156,11 +156,11 @@
      TCanvas *myc = new TCanvas("myc","",800,600);
      gStyle->SetOptStat(1111);
      
-     if(i <=4 )  gPad->SetLogy(1);
+     if(i <= 4 )  gPad->SetLogy(1);
      else gPad->SetLogy(0);
      
      
-     if(i <=4 )   f1_hist1[i]->SetStats(kTRUE);   // stat box  
+     if(i <= 8 )   f1_hist1[i]->SetStats(kTRUE);   // stat box  
      else  f1_hist1[i]->SetStats(kFALSE);
      
      f1_hist1[i]->SetTitle("");
@@ -187,7 +187,7 @@
      leg->AddEntry(f2_hist1[i],"CMSSW_210pre6","l");
 
 
-     if (i<= 4) {
+     if (i <= 8) {
        TPaveStats *ptstats = new TPaveStats(0.8,0.8,0.99,1.0,"brNDC");
        ptstats->SetTextColor(41);
        f1_hist1[i]->GetListOfFunctions()->Add(ptstats);
