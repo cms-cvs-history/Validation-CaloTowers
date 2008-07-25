@@ -3,8 +3,8 @@
 
    TCanvas *myc = new TCanvas("myc","",800,600);
       
-   TFile f1("HcalRecHitValidationHF_gamma_206.root");
-   TFile f2("HcalRecHitValidationHF_gamma_210pre6.root");
+   TFile f1("HcalRecHitValidationHF_gamma_210pre6.root");
+   TFile f2("HcalRecHitValidationHF_gamma_210pre9.root");
 
    
    // service variables
@@ -85,8 +85,8 @@
 
    for (int i = 0; i < Nhist1; i++){
 
-    f1_hist1[i]->SetStats(kFALSE);   
-    f2_hist1[i]->SetStats(kFALSE); 
+     if(i <= 1 )   f1_hist1[i]->SetStats(kTRUE);   // stat
+     else  f1_hist1[i]->SetStats(kFALSE);
     
     f1_hist1[i]->SetTitle("");
     f2_hist1[i]->SetTitle("");
@@ -102,22 +102,32 @@
     f2_hist1[i]->SetLineStyle(2);  
 
 
-     //     if(i == 0 ) {
-       TLegend *leg = new TLegend(0.78, 0.82, 0.98, 0.97, "","brNDC");
-       //     }
-       //     else {
-       //       TLegend *leg = new TLegend(0.08, 0.6, 0.38, 0.85, "","brNDC");
-       //     }
+    TLegend *leg = new TLegend(0.58, 0.87, 0.84, 0.97, "","brNDC");
 
      leg->SetBorderSize(2);
      //  leg->SetFillColor(51); // see new color definition above
      leg->SetFillStyle(1001); //
-     leg->AddEntry(f1_hist1[i],"CMSSW_206","l");
-     leg->AddEntry(f2_hist1[i],"CMSSW_210pre6","l");
+     leg->AddEntry(f1_hist1[i],"CMSSW_210pre6","l");
+     leg->AddEntry(f2_hist1[i],"CMSSW_210pre9","l");
 
 
-     f1_hist1[i]->Draw("hist");   
-     f2_hist1[i]->Draw("hist same");   
+     if (i<= 1) {
+       TPaveStats *ptstats = new TPaveStats(0.85,0.86,0.98,0.98,"brNDC");
+       ptstats->SetTextColor(41);
+       f1_hist1[i]->GetListOfFunctions()->Add(ptstats);
+       ptstats->SetParent(f1_hist1[i]->GetListOfFunctions());
+       TPaveStats *ptstats = new TPaveStats(0.85,0.74,0.98,0.86,"brNDC");
+       ptstats->SetTextColor(43);
+       f2_hist1[i]->GetListOfFunctions()->Add(ptstats);
+       ptstats->SetParent(f2_hist1[i]->GetListOfFunctions());
+
+       f1_hist1[i]->Draw(""); // "stat"
+       f2_hist1[i]->Draw("hist sames");
+     }
+     else {
+       f1_hist1[i]->Draw(""); // "stat"
+       f2_hist1[i]->Draw("hist same");
+     }
 
      leg->Draw();   
      
@@ -130,7 +140,7 @@
 
     f1_hist2[i]->SetStats(kFALSE);   
     f2_hist2[i]->SetStats(kFALSE); 
-    
+
     f1_hist2[i]->SetTitle("");
     f2_hist2[i]->SetTitle("");
 
@@ -156,8 +166,8 @@
     TLegend *leg = new TLegend(0.43, 0.82, 0.63, 0.97, "","brNDC");    
      leg->SetBorderSize(2);
      leg->SetFillStyle(1001); 
-     leg->AddEntry(f1_histp[i],"CMSSW_206","pl");
-     leg->AddEntry(f2_histp[i],"CMSSW_210pre6","pl");
+     leg->AddEntry(f1_histp[i],"CMSSW_210pre6","pl");
+     leg->AddEntry(f2_histp[i],"CMSSW_210pre9","pl");
 
      leg->Draw();   
      
@@ -198,8 +208,8 @@
     TLegend *leg = new TLegend(0.78, 0.82, 0.98, 0.97, "","brNDC");    
      leg->SetBorderSize(2);
      leg->SetFillStyle(1001); 
-     leg->AddEntry(f1_prof[i],"CMSSW_206","pl");
-     leg->AddEntry(f2_prof[i],"CMSSW_210pre6","pl");
+     leg->AddEntry(f1_prof[i],"CMSSW_210pre6","pl");
+     leg->AddEntry(f2_prof[i],"CMSSW_210pre9","pl");
 
      leg->Draw("");   
      

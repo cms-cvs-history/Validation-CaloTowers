@@ -3,8 +3,8 @@
 
    TCanvas *myc = new TCanvas("myc","",800,600);
       
-   TFile f1("CaloTowersValidationHE_206.root");
-   TFile f2("CaloTowersValidationHE_210pre6.root");
+   TFile f1("HcalRecHitValidationHE_210pre6.root");
+   TFile f2("HcalRecHitValidationHE_210pre9.root");
 
    
    // service variables
@@ -46,11 +46,11 @@
    f1_hist1[4]->GetXaxis()->SetTitle("HE CaloTowers HCAL energy (GeV)");
 
    //   f1_hist1[1]->SetMaximum(400.);
-   f1_hist1[0]->GetXaxis()->SetRangeUser(0.,60.);
+   f1_hist1[0]->GetXaxis()->SetRangeUser(0.,30.);
    f1_hist1[1]->GetXaxis()->SetRangeUser(0.,100.);
-   f1_hist1[2]->GetXaxis()->SetRangeUser(0.,30.);
-   f1_hist1[3]->GetXaxis()->SetRangeUser(0.,50.);
-   f1_hist1[4]->GetXaxis()->SetRangeUser(0.,50.);
+   f1_hist1[2]->GetXaxis()->SetRangeUser(0.,50.);
+   f1_hist1[3]->GetXaxis()->SetRangeUser(0.,80.);
+   f1_hist1[4]->GetXaxis()->SetRangeUser(0.,80.);
    // f1_hist[7]->GetXaxis()->SetRangeUser(0.,160.);
    // hist1->GetXaxis()->SetNdivisions(-21);
    // hist1->GetYaxis()->SetNdivisions(-1003);
@@ -60,12 +60,11 @@
 
    for (int i = 0; i < Nhist1; i++){
 
-     if(i !=2 ) gPad->SetLogy();
+     if(i <= 1 ) gPad->SetLogy();
      else gPad->SetLogy(0);
 
-    f1_hist1[i]->SetStats(kFALSE);   
-    f2_hist1[i]->SetStats(kFALSE); 
-    
+      f1_hist1[i]->SetStats(kTRUE);   // stat
+   
     f1_hist1[i]->SetTitle("");
     f2_hist1[i]->SetTitle("");
 
@@ -76,26 +75,27 @@
     f1_hist1[i]->SetLineColor(41);
     f1_hist1[i]->SetLineStyle(1); 
     
-    f2_hist1[i]->SetLineColor(42);
+    f2_hist1[i]->SetLineColor(43);
     f2_hist1[i]->SetLineStyle(2);  
 
-
-     //     if(i == 0 ) {
-       TLegend *leg = new TLegend(0.68, 0.82, 0.98, 0.97, "","brNDC");
-       //     }
-       //     else {
-       //       TLegend *leg = new TLegend(0.08, 0.6, 0.38, 0.85, "","brNDC");
-       //     }
-
+     TLegend *leg = new TLegend(0.58, 0.87, 0.84, 0.97, "","brNDC");
      leg->SetBorderSize(2);
      //  leg->SetFillColor(51); // see new color definition above
      leg->SetFillStyle(1001); //
-     leg->AddEntry(f1_hist1[i],"CMSSW_206","l");
-     leg->AddEntry(f2_hist1[i],"CMSSW_210pre6","l");
+     leg->AddEntry(f1_hist1[i],"CMSSW_210pre6","l");
+     leg->AddEntry(f2_hist1[i],"CMSSW_210pre9","l");
 
-
-     f1_hist1[i]->Draw("hist");   
-     f2_hist1[i]->Draw("hist same");   
+     TPaveStats *ptstats = new TPaveStats(0.85,0.86,0.98,0.98,"brNDC");
+     ptstats->SetTextColor(41);
+     f1_hist1[i]->GetListOfFunctions()->Add(ptstats);
+     ptstats->SetParent(f1_hist1[i]->GetListOfFunctions());
+     TPaveStats *ptstats = new TPaveStats(0.85,0.74,0.98,0.86,"brNDC");
+     ptstats->SetTextColor(43);
+     f2_hist1[i]->GetListOfFunctions()->Add(ptstats);
+     ptstats->SetParent(f2_hist1[i]->GetListOfFunctions());
+     
+     f1_hist1[i]->Draw("hist"); // "stat"
+     f2_hist1[i]->Draw("hist sames");
 
      leg->Draw();   
      
