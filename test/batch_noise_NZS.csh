@@ -4,7 +4,7 @@ setenv MYWORKDIR /afs/cern.ch/cms/CAF/CMSALCA/ALCA_HCALCALIB/data/data_Validatio
 setenv MYOUT /castor/cern.ch/user/a/abdullin/validation_210
 #----------------
 cd ${MYWORKDIR}
-cp ${MYWORKDIR}/runNoise_valid_simhits_digis_rechits_towers_NZS_cfg.py   ${WORKDIR}/run.py
+cp ${MYWORKDIR}/runNoise_valid_simhits_digis_rechits_NZS_cfg.py   ${WORKDIR}/run.py
 eval `scramv1 runtime -csh`
 #
 cd ${WORKDIR}
