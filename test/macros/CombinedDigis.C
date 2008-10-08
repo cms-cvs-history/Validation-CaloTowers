@@ -59,6 +59,21 @@ void CombinedDigis(TString ref_vers="210",
   ProcessSubDetDigi(HO_ref_file, HO_val_file, DigStream, HO_nHist1, HO_nHist2, HO_nHistTot, ref_vers, val_vers);
   ProcessSubDetDigi(Noise_ref_file, Noise_val_file, DigStream, Noise_nHist1, Noise_nHist2, Noise_nHistTot, ref_vers, val_vers);
 
+  //Close ROOT files
+  HB_ref_file.Close();
+  HE_ref_file.Close();
+  HF_ref_file.Close();
+  HF_gamma_ref_file.Close();
+  HO_ref_file.Close();
+  Noise_ref_file.Close();
+
+  HB_val_file.Close();
+  HE_val_file.Close();
+  HF_val_file.Close();
+  HF_gamma_val_file.Close();
+  HO_val_file.Close();
+  Noise_val_file.Close();
+
   return;
 }
 
@@ -262,8 +277,5 @@ void ProcessSubDetDigi(TFile &ref_file, TFile &val_file, ifstream &digstr, const
       nh2++;
     }
   }
-  //Close ROOT files
-  ref_file.Close() ;  
-  val_file.Close() ;
   return;
 }

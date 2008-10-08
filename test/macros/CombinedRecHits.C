@@ -82,7 +82,24 @@ void CombinedRecHits(TString ref_vers="210",
   ProcessSubDetRecHit(ALL_ref_file, ALL_val_file, Recstream, ALL_nHist1, ALL_nHist2, ALL_nProf, ALL_nProfInd, ALL_nHistTot, ref_vers, val_vers);
   ProcessSubDetRecHit(Noise_ref_file, Noise_val_file, Recstream, Noise_nHist1, Noise_nHist2, Noise_nProf, Noise_nProfInd, Noise_nHistTot, ref_vers, val_vers);
 
+  //Close ROOT files
+  HB_ref_file.Close();  
+  HE_ref_file.Close();  
+  HF_ref_file.Close();  
+  HF_gamma_ref_file.Close();  
+  HO_ref_file.Close();  
+  ALL_ref_file.Close();  
+  Noise_ref_file.Close();  
 
+  HB_val_file.Close();  
+  HE_val_file.Close();  
+  HF_val_file.Close();  
+  HF_gamma_val_file.Close();  
+  HO_val_file.Close();  
+  ALL_val_file.Close();  
+  Noise_val_file.Close();  
+
+  return;
 }
 
 void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, const int nHist1, const int nHist2, const int nProf, const int nProfInd, const int nHistTot, TString ref_vers, TString val_vers){
@@ -373,11 +390,6 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
       
       npi++;
     }
-  }
-  
-  //Close ROOT files
-  ref_file.Close() ;  
-  val_file.Close() ;
-  return;
-     
+  }  
+  return;     
 }
