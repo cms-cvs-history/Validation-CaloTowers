@@ -495,17 +495,17 @@ HcalRecHitTask_En_rechits_cone_profile_vs_ieta_depth4	1    HcalRecHitTask_En_rec
                  HcalRecHitTask_energy_of_rechits_HE	0
                  HcalRecHitTask_energy_of_rechits_HF	0
                  HcalRecHitTask_energy_of_rechits_HO	0
-         HcalRecHitTask_energy_rechits_vs_simhits_HB	1             HcalRecHitTask_energy_rechits_vs_simhits_HB.gif	0.6	100.	2Dp	noStat	noChi2	NoLog	41	42	HB RecHits energy vs SimHits energy (GeV)
+         HcalRecHitTask_energy_rechits_vs_simhits_HB	1           HcalRecHitTask_energy_rechits_vs_simhits_HB_G.gif	0.6	100.	2Dp	noStat	noChi2	NoLog	41	42	HB RecHits energy vs SimHits energy (GeV)
  HcalRecHitTask_energy_rechits_vs_simhits_profile_HB	0
-         HcalRecHitTask_energy_rechits_vs_simhits_HE	1             HcalRecHitTask_energy_rechits_vs_simhits_HE.gif	0.6	100.	2Dp	noStat	noChi2	NoLog	41	42	HE RecHits energy vs SimHits energy (GeV)
+         HcalRecHitTask_energy_rechits_vs_simhits_HE	1           HcalRecHitTask_energy_rechits_vs_simhits_HE_G.gif	0.6	100.	2Dp	noStat	noChi2	NoLog	41	42	HE RecHits energy vs SimHits energy (GeV)
  HcalRecHitTask_energy_rechits_vs_simhits_profile_HE	0
-         HcalRecHitTask_energy_rechits_vs_simhits_HF	1             HcalRecHitTask_energy_rechits_vs_simhits_HF.gif	30.	120.	2Dp	noStat	noChi2	NoLog	41	42	HF RecHits energy vs SimHits energy (GeV)
+         HcalRecHitTask_energy_rechits_vs_simhits_HF	1           HcalRecHitTask_energy_rechits_vs_simhits_HF_G.gif	30.	120.	2Dp	noStat	noChi2	NoLog	41	42	HF RecHits energy vs SimHits energy (GeV)
  HcalRecHitTask_energy_rechits_vs_simhits_profile_HF	0
-        HcalRecHitTask_energy_rechits_vs_simhits_HFL	1            HcalRecHitTask_energy_rechits_vs_simhits_HFL.gif	20.	100.	2Dp	noStat	noChi2	NoLog	41	42	HFL RecHits energy (GeV) vs SimHits energy (p.e)
+        HcalRecHitTask_energy_rechits_vs_simhits_HFL	1          HcalRecHitTask_energy_rechits_vs_simhits_HFL_G.gif	20.	100.	2Dp	noStat	noChi2	NoLog	41	42	HFL RecHits energy (GeV) vs SimHits energy (p.e)
 HcalRecHitTask_energy_rechits_vs_simhits_profile_HFL	0
-        HcalRecHitTask_energy_rechits_vs_simhits_HFS	1            HcalRecHitTask_energy_rechits_vs_simhits_HFS.gif	20.	100.	2Dp	noStat	noChi2	NoLog	41	42	HFS RecHits energy (GeV) vs SimHits energy (p.e.)
+        HcalRecHitTask_energy_rechits_vs_simhits_HFS	1          HcalRecHitTask_energy_rechits_vs_simhits_HFS_G.gif	20.	100.	2Dp	noStat	noChi2	NoLog	41	42	HFS RecHits energy (GeV) vs SimHits energy (p.e.)
 HcalRecHitTask_energy_rechits_vs_simhits_profile_HFS	0
-         HcalRecHitTask_energy_rechits_vs_simhits_HO	1             HcalRecHitTask_energy_rechits_vs_simhits_HO.gif	0.4	100.	2Dp	noStat	noChi2	NoLog	41	42	HO RecHits energy vs SimHits energy (GeV)
+         HcalRecHitTask_energy_rechits_vs_simhits_HO	1           HcalRecHitTask_energy_rechits_vs_simhits_HO_G.gif	0.4	100.	2Dp	noStat	noChi2	NoLog	41	42	HO RecHits energy vs SimHits energy (GeV)
  HcalRecHitTask_energy_rechits_vs_simhits_profile_HO	0
                             HcalRecHitTask_timing_HB	0
                             HcalRecHitTask_timing_HE	0

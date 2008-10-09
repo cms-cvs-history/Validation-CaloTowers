@@ -43,7 +43,7 @@ void CombinedRecHits(TString ref_vers="210",
   const int HE_nProf    = 1;
   const int HE_nProfInd = 0;
 
-  const int HF_nHistTot = 98;
+  const int HF_nHistTot = 99;
   const int HF_nHist1   = 2;
   const int HF_nHist2   = 1;
   const int HF_nProf    = 1;
@@ -55,13 +55,13 @@ void CombinedRecHits(TString ref_vers="210",
   const int HF_gamma_nProf    = 1;
   const int HF_gamma_nProfInd = 2;
 
-  const int HO_nHistTot = 90;
+  const int HO_nHistTot = 91;
   const int HO_nHist1   = 2;
   const int HO_nHist2   = 2;
   const int HO_nProf    = 1;
   const int HO_nProfInd = 0;
 
-  const int ALL_nHistTot = 98;
+  const int ALL_nHistTot = 114;
   const int ALL_nHist1   = 0;
   const int ALL_nHist2   = 6;
   const int ALL_nProf    = 6;
@@ -390,6 +390,6 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
       
       npi++;
     }
-  }  
+  }
   return;     
 }
