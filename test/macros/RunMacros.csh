@@ -33,7 +33,7 @@ mkdir Digis
 mkdir Noise+DB
 mkdir RecHits
 mkdir SimHits
-mkdir RelVal
+
 
 #Create lower directories and distribute html files
 mkdir CaloTowers/HB
@@ -78,21 +78,6 @@ cp ../html_indices/Noise+DB_DB.html Noise+DB/DB/index.html
 cp ../html_indices/Noise+DB_ZS.html Noise+DB/Noise_ZS/index.html
 cp ../html_indices/Noise+DB_NZS.html Noise+DB/Noise_NZS/index.html
 
-mkdir RelVal/TTbar
-mkdir RelVal/TTbar/CalTowHB
-mkdir RelVal/TTbar/CalTowHE
-mkdir RelVal/TTbar/CalTowHF
-
-mkdir RelVal/QCD
-mkdir RelVal/QCD/CalTowHB
-mkdir RelVal/QCD/CalTowHE
-mkdir RelVal/QCD/CalTowHF
-
-cp ../html_indices/RelVal_RecHits_TTBar.html RelVal/TTbar/index.html
-cp ../html_indices/CaloTowers_HB.html RelVal/TTbar/CalTowHB/index.html
-cp ../html_indices/CaloTowers_HE.html RelVal/TTbar/CalTowHE/index.html
-cp ../html_indices/CaloTowers_HF.html RelVal/TTbar/CalTowHF/index.html
-
 cd ../
 
 #CaloTowers
@@ -130,15 +115,6 @@ mv HcalRecHitTask_*_HO.gif ${NEW_VERS}_vs_${OLD_VERS}/RecHits/HO/
 
 mv HcalRecHits_*gif ${NEW_VERS}_vs_${OLD_VERS}/Noise+DB/Noise_ZS/
 mv N_*gif ${NEW_VERS}_vs_${OLD_VERS}/Noise+DB/Noise_ZS/
-
-#RelVal
-#This will not work with QCD! The gif files will need different names
-root -l -q 'RelValMacro.C("'${OLD_VERS}'","'${NEW_VERS}'")'
-
-mv HB_CaloTowers*HB.gif ${NEW_VERS}_vs_${OLD_VERS}/RelVal/TTbar/CalTowHB/
-mv HE_CaloTowers*HE.gif ${NEW_VERS}_vs_${OLD_VERS}/RelVal/TTbar/CalTowHE/
-mv HF_CaloTowers*HF.gif ${NEW_VERS}_vs_${OLD_VERS}/RelVal/TTbar/CalTowHF/
-mv *gif ${NEW_VERS}_vs_${OLD_VERS}/RelVal/TTbar/
 
 #mv ${NEW_VERS}_vs_${OLD_VERS} /afs/cern.ch/cms/cpt/Software/html/General/Validation/SVSuite/HCAL/
 
