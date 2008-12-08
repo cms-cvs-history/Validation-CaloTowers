@@ -113,6 +113,8 @@ mv HcalRecHitTask_*_HE.gif ${NEW_VERS}_vs_${OLD_VERS}/RecHits/HE/
 mv HcalRecHitTask_*_HF.gif ${NEW_VERS}_vs_${OLD_VERS}/RecHits/HF/
 mv HcalRecHitTask_*_HO.gif ${NEW_VERS}_vs_${OLD_VERS}/RecHits/HO/
 
+mv *NZS.gif ${NEW_VERS}_vs_${OLD_VERS}/Noise+DB/Noise_NZS/
+
 mv HcalRecHits_*gif ${NEW_VERS}_vs_${OLD_VERS}/Noise+DB/Noise_ZS/
 mv N_*gif ${NEW_VERS}_vs_${OLD_VERS}/Noise+DB/Noise_ZS/
 
