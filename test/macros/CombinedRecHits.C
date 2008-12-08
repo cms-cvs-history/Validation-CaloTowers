@@ -3,8 +3,8 @@
 void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, const int nHist1, const int nHist2, const int nProf, const int nProfInd, const int nHistTot, TString ref_vers, TString val_vers);
 
 //Macro takes 2 parameters as arguments: the version to be validated and the reference version
-void CombinedRecHits(TString ref_vers="210",
-		     TString val_vers="210"){
+void CombinedRecHits(TString ref_vers="220",
+		     TString val_vers="220pre1"){
 
   //Information contained in stream (in order): 
   //Name of histograms in root file, 1/0 switch whether they should be processed. If yes, then:
@@ -20,7 +20,8 @@ void CombinedRecHits(TString ref_vers="210",
   TFile HF_gamma_ref_file("HcalRecHitValidationHF_gamma_"+ref_vers+".root");
   TFile HO_ref_file("HcalRecHitValidationHO_"+ref_vers+".root");
   TFile ALL_ref_file("HcalRecHitValidationALL_"+ref_vers+".root"); 
-  TFile Noise_ref_file("HcalRecHitValidation_noise_NZS_"+ref_vers+".root");
+  TFile Noise_ref_file("HcalRecHitValidation_noise_"+ref_vers+".root");
+  TFile Noise_NZS_ref_file("HcalRecHitValidation_noise_NZS_"+ref_vers+".root");
    
   TFile HB_val_file("HcalRecHitValidationHB_"+val_vers+".root"); 
   TFile HE_val_file("HcalRecHitValidationHE_"+val_vers+".root"); 
@@ -28,7 +29,8 @@ void CombinedRecHits(TString ref_vers="210",
   TFile HF_gamma_val_file("HcalRecHitValidationHF_gamma_"+val_vers+".root"); 
   TFile HO_val_file("HcalRecHitValidationHO_"+val_vers+".root"); 
   TFile ALL_val_file("HcalRecHitValidationALL_"+val_vers+".root"); 
-  TFile Noise_val_file("HcalRecHitValidation_noise_NZS_"+val_vers+".root"); 
+  TFile Noise_val_file("HcalRecHitValidation_noise_"+val_vers+".root"); 
+  TFile Noise_NZS_val_file("HcalRecHitValidation_noise_NZS_"+val_vers+".root"); 
   
   //Service variables
   const int HB_nHistTot = 97;
@@ -73,6 +75,11 @@ void CombinedRecHits(TString ref_vers="210",
   const int Noise_nProf    = 0;
   const int Noise_nProfInd = 8;
 
+  const int Noise_NZS_nHistTot = 88;
+  const int Noise_NZS_nHist1   = 9;
+  const int Noise_NZS_nHist2   = 0;
+  const int Noise_NZS_nProf    = 0;
+  const int Noise_NZS_nProfInd = 8;
 
   ProcessSubDetRecHit(HB_ref_file, HB_val_file, Recstream, HB_nHist1, HB_nHist2, HB_nProf, HB_nProfInd, HB_nHistTot, ref_vers, val_vers);
   ProcessSubDetRecHit(HE_ref_file, HE_val_file, Recstream, HE_nHist1, HE_nHist2, HE_nProf, HB_nProfInd, HE_nHistTot, ref_vers, val_vers);
@@ -81,6 +88,7 @@ void CombinedRecHits(TString ref_vers="210",
   ProcessSubDetRecHit(HO_ref_file, HO_val_file, Recstream, HO_nHist1, HO_nHist2, HO_nProf, HO_nProfInd, HO_nHistTot, ref_vers, val_vers);
   ProcessSubDetRecHit(ALL_ref_file, ALL_val_file, Recstream, ALL_nHist1, ALL_nHist2, ALL_nProf, ALL_nProfInd, ALL_nHistTot, ref_vers, val_vers);
   ProcessSubDetRecHit(Noise_ref_file, Noise_val_file, Recstream, Noise_nHist1, Noise_nHist2, Noise_nProf, Noise_nProfInd, Noise_nHistTot, ref_vers, val_vers);
+  ProcessSubDetRecHit(Noise_NZS_ref_file, Noise_NZS_val_file, Recstream, Noise_NZS_nHist1, Noise_NZS_nHist2, Noise_NZS_nProf, Noise_NZS_nProfInd, Noise_NZS_nHistTot, ref_vers, val_vers);
 
   //Close ROOT files
   HB_ref_file.Close();  
@@ -90,6 +98,7 @@ void CombinedRecHits(TString ref_vers="210",
   HO_ref_file.Close();  
   ALL_ref_file.Close();  
   Noise_ref_file.Close();  
+  Noise_NZS_ref_file.Close();
 
   HB_val_file.Close();  
   HE_val_file.Close();  
@@ -98,12 +107,13 @@ void CombinedRecHits(TString ref_vers="210",
   HO_val_file.Close();  
   ALL_val_file.Close();  
   Noise_val_file.Close();  
+  Noise_NZS_val_file.Close();
 
   return;
 }
 
 void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, const int nHist1, const int nHist2, const int nProf, const int nProfInd, const int nHistTot, TString ref_vers, TString val_vers){
-  
+
   TCanvas *myc = new TCanvas("myc","",800,600);
   
   TH1F*     ref_hist1[nHist1];
@@ -150,6 +160,14 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
     xTitleCheck = xAxisTitle;
     xTitleCheck = xTitleCheck.substr(1,7);
 
+    //Format canvas
+    if(DimSwitch == "PRwide") {
+      gStyle->SetPadLeftMargin(0.06);
+      gStyle->SetPadRightMargin(0.03);
+      myc = new TCanvas("myc","",1200,600);
+    }
+    else myc = new TCanvas("myc","",800,600);
+
     //Format pad
     if (LogSwitch == "Log") gPad->SetLogy();
     else                    gPad->SetLogy(0);
@@ -168,7 +186,7 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
       if (StatSwitch != "Stat" && StatSwitch != "Statrv") ref_hist1[nh1]->SetStats(kFALSE);   
       
       if (xAxisRange > 0) ref_hist1[nh1]->GetXaxis()->SetRangeUser(0.,xAxisRange);
-      if (yAxisRange > 0) ref_hist1[nh1]->GetYaxis()->SetRangeUser(0.,yAxisRange);
+      if (yAxisRange > 0) ref_hist1[nh1]->SetMaximum(yAxisRange);
 
       if (xTitleCheck != "NoTitle") ref_hist1[nh1]->GetXaxis()->SetTitle(xAxisTitle);
 
@@ -184,14 +202,7 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
       val_hist1[nh1]->SetLineStyle(2);  
    
       //Legend
-      TLegend *leg = new TLegend(0.50, 0.91, 0.76, 0.99, "","brNDC");
-      leg->SetBorderSize(2);
-      leg->SetFillStyle(1001); //
-      leg->AddEntry(ref_hist1[nh1],"CMSSW_"+ref_vers,"l");
-      leg->AddEntry(val_hist1[nh1],"CMSSW_"+val_vers,"l");
-
-      //Legend
-      TLegend *leg = new TLegend(0.50, 0.91, 0.76, 0.99, "","brNDC");
+      TLegend *leg = new TLegend(0.58, 0.91, 0.84, 0.99, "","brNDC");
       leg->SetBorderSize(2);
       leg->SetFillStyle(1001); //
       leg->AddEntry(ref_hist1[nh1],"CMSSW_"+ref_vers,"l");
@@ -306,7 +317,8 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
 	npr++;
       }
       
-      TLegend *leg = new TLegend(0.38, 0.82, 0.68, 0.97, "","brNDC");    
+      //Legend
+      TLegend *leg = new TLegend(0.58, 0.91, 0.84, 0.99, "","brNDC");
       leg->SetBorderSize(2);
       leg->SetFillStyle(1001); 
       leg->AddEntry(ref_hist2[nh2],"CMSSW_"+ref_vers,"pl");
@@ -343,7 +355,7 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
     }
 
     //Profiles not associated with histograms
-    else if (DimSwitch == "PR"){
+    else if (DimSwitch == "PR" || DimSwitch == "PRwide"){
       //Get profiles from files
       ref_file.cd("DQMData/HcalRecHitsV/HcalRecHitTask");   
       ref_prof[npi] = (TProfile*) gDirectory->Get(HistName);
@@ -357,28 +369,37 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
       }
       ref_prof[npi]->GetXaxis()->SetTitle(xAxisTitle);
       
+      if (xAxisRange > 0) ref_prof[npi]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+      if (yAxisRange > 0) ref_prof[npi]->SetMaximum(yAxisRange);
+
       ref_prof[npi]->SetTitle("");
       ref_prof[npi]->SetLineColor(RefCol);
-      ref_prof[npi]->SetLineStyle(1);     
-      ref_prof[npi]->SetLineWidth(1); 
+      ref_prof[npi]->SetLineStyle(2);     
+      ref_prof[npi]->SetLineWidth(2); 
       ref_prof[npi]->SetMarkerColor(RefCol);
       ref_prof[npi]->SetMarkerStyle(21);
-      ref_prof[npi]->SetMarkerSize(0.8);  
-      
+      ref_prof[npi]->SetMarkerSize(0.8);
+
       val_prof[npi]->SetTitle("");
       val_prof[npi]->SetLineColor(ValCol);
-      val_prof[npi]->SetLineStyle(1);  
+      val_prof[npi]->SetLineStyle(2);  
       val_prof[npi]->SetLineWidth(1); 
       val_prof[npi]->SetMarkerColor(ValCol);
       val_prof[npi]->SetMarkerStyle(22);
       val_prof[npi]->SetMarkerSize(1.0);  
+
+      if (DimSwitch == "PRwide"){
+	ref_prof[npi]->SetMarkerSize(0.05);  
+	val_prof[npi]->SetMarkerSize(0.04);  
+      }
       
       myc->SetGrid();
       
       ref_prof[npi]->Draw("hist pl");   
       val_prof[npi]->Draw("hist pl same");   
       
-      TLegend *leg = new TLegend(0.78, 0.82, 0.98, 0.97, "","brNDC");    
+      //Legend
+      TLegend *leg = new TLegend(0.58, 0.91, 0.84, 0.99, "","brNDC");
       leg->SetBorderSize(2);
       leg->SetFillStyle(1001); 
       leg->AddEntry(ref_prof[npi],"CMSSW_"+ref_vers,"pl");

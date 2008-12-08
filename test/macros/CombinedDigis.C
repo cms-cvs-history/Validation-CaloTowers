@@ -2,8 +2,8 @@
 void ProcessSubDetDigi(TFile &ref_file, TFile &val_file, ifstream &digstr, const int nHist1, const int nHist2, const int nHistTot, TString ref_vers, TString val_vers);
 
 //Macro takes 2 parameters as arguments: the version to be validated and the reference version
-void CombinedDigis(TString ref_vers="210",
-		   TString val_vers="210pre6"){
+void CombinedDigis(TString ref_vers="220pre1",
+		   TString val_vers="220"){
   
   //Information contained in stream (in order): 
   //Name of histograms in root file, 1/0 switch whether they should be processed. If yes, then:
@@ -18,14 +18,14 @@ void CombinedDigis(TString ref_vers="210",
   TFile HF_ref_file("HcalRecHitValidationHF_"+ref_vers+".root");
   TFile HF_gamma_ref_file("HcalRecHitValidationHF_gamma_"+ref_vers+".root");
   TFile HO_ref_file("HcalRecHitValidationHO_"+ref_vers+".root"); 
-  TFile Noise_ref_file("HcalRecHitValidation_noise_"+ref_vers+".root"); 
+  TFile Noise_ref_file("HcalRecHitValidation_noise_NZS_"+ref_vers+".root"); 
 
   TFile HB_val_file("HcalRecHitValidationHB_"+val_vers+".root"); 
   TFile HE_val_file("HcalRecHitValidationHE_"+val_vers+".root"); 
   TFile HF_val_file("HcalRecHitValidationHF_"+val_vers+".root"); 
   TFile HF_gamma_val_file("HcalRecHitValidationHF_gamma_"+val_vers+".root"); 
   TFile HO_val_file("HcalRecHitValidationHO_"+val_vers+".root"); 
-  TFile Noise_val_file("HcalRecHitValidation_noise_"+val_vers+".root"); 
+  TFile Noise_val_file("HcalRecHitValidation_noise_NZS_"+val_vers+".root"); 
 
   //Service variables
   const int HB_nHist1   = 5;
@@ -152,7 +152,7 @@ void ProcessSubDetDigi(TFile &ref_file, TFile &val_file, ifstream &digstr, const
       val_hist1[nh1]->SetLineStyle(2);  
       
       //Legend
-      TLegend *leg = new TLegend(0.50, 0.91, 0.76, 0.99, "","brNDC");
+      TLegend *leg = new TLegend(0.58, 0.91, 0.84, 0.99, "","brNDC");
       leg->SetBorderSize(2);
       leg->SetFillStyle(1001); //
       leg->AddEntry(ref_hist1[nh1],"CMSSW_"+ref_vers,"l");
@@ -221,7 +221,7 @@ void ProcessSubDetDigi(TFile &ref_file, TFile &val_file, ifstream &digstr, const
 
       if (xAxisRange > 0) ref_hist2[nh2]->GetXaxis()->SetRangeUser(0.,xAxisRange);
       if (yAxisRange > 0) ref_hist2[nh2]->GetYaxis()->SetRangeUser(0.,yAxisRange);
-     
+
       ref_hist2[nh2]->GetXaxis()->SetTitle(xAxisTitle);
 
       ref_hist2[nh2]->SetTitle("");
@@ -241,7 +241,8 @@ void ProcessSubDetDigi(TFile &ref_file, TFile &val_file, ifstream &digstr, const
       ref_hist2[nh2]->Draw("P");   
       val_hist2[nh2]->Draw("PSAME");   
       
-      TLegend *leg = new TLegend(0.38, 0.82, 0.68, 0.97, "","brNDC");    
+      //Legend
+      TLegend *leg = new TLegend(0.58, 0.91, 0.84, 0.99, "","brNDC");
       leg->SetBorderSize(2);
       leg->SetFillStyle(1001); 
       leg->AddEntry(ref_hist2[nh2],"CMSSW_"+ref_vers,"pl");

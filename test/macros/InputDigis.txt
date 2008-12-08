@@ -27,7 +27,7 @@
    HcalDigiTask_ratio_amplitude_vs_simhits_depth3_HB	0
    HcalDigiTask_ratio_amplitude_vs_simhits_depth4_HB	0
                     HcalDigiTask_signal_amplitude_HB	0
-             HcalDigiTask_signal_amplitude_depth1_HB	1                 HcalDigiTask_signal_amplitude_depth1_HB.gif	-1	-1	1D	NoStat	Chi2	NoLog	41	42	HB signal amplitude (fC)
+             HcalDigiTask_signal_amplitude_depth1_HB	1                 HcalDigiTask_signal_amplitude_depth1_HB.gif	-1	160	1D	NoStat	Chi2	NoLog	41	42	HB signal amplitude (fC)
              HcalDigiTask_signal_amplitude_depth2_HB	0
              HcalDigiTask_signal_amplitude_depth3_HB	0
              HcalDigiTask_signal_amplitude_depth4_HB	0
@@ -64,7 +64,7 @@
    HcalDigiTask_ratio_amplitude_vs_simhits_depth3_HE	0
    HcalDigiTask_ratio_amplitude_vs_simhits_depth4_HE	0
                     HcalDigiTask_signal_amplitude_HE	0
-             HcalDigiTask_signal_amplitude_depth1_HE	1                 HcalDigiTask_signal_amplitude_depth1_HE.gif	-1	-1	1D	NoStat	Chi2	NoLog	41	42	HE signal amplitude depth 1 (fC)
+             HcalDigiTask_signal_amplitude_depth1_HE	1                 HcalDigiTask_signal_amplitude_depth1_HE.gif	-1	1000	1D	NoStat	Chi2	NoLog	41	42	HE signal amplitude depth 1 (fC)
              HcalDigiTask_signal_amplitude_depth2_HE	1                 HcalDigiTask_signal_amplitude_depth2_HE.gif	-1	-1	1D	NoStat	Chi2	NoLog	41	42	HE signal amplitude depth 2 (fC)
              HcalDigiTask_signal_amplitude_depth3_HE	0
              HcalDigiTask_signal_amplitude_depth4_HE	0
@@ -82,8 +82,8 @@
                       HcalDigiTask_ADC0_fC_depth4_HF	0
                HcalDigiTask_all_amplitudes_vs_bin_HF	0
                 HcalDigiTask_amplitude_vs_simhits_HF	0
-         HcalDigiTask_amplitude_vs_simhits_depth1_HF	1             HcalDigiTask_amplitude_vs_simhits_depth1_HF.gif	-1	-1	2D	NoStat	noChi2	NoLog	41	42	HF signal amplitude (fC) vs SimHits (pe) depth 1
-         HcalDigiTask_amplitude_vs_simhits_depth2_HF	1             HcalDigiTask_amplitude_vs_simhits_depth2_HF.gif	-1	-1	2D	NoStat	noChi2	NoLog	41	42	HF signal amplitude (fC) vs SimHits (pe) depth 2
+         HcalDigiTask_amplitude_vs_simhits_depth1_HF	1             HcalDigiTask_amplitude_vs_simhits_depth1_HF.gif	-1	700	2D	NoStat	noChi2	NoLog	41	42	HF signal amplitude (fC) vs SimHits (pe) depth 1
+         HcalDigiTask_amplitude_vs_simhits_depth2_HF	1             HcalDigiTask_amplitude_vs_simhits_depth2_HF.gif	-1	700	2D	NoStat	noChi2	NoLog	41	42	HF signal amplitude (fC) vs SimHits (pe) depth 2
          HcalDigiTask_amplitude_vs_simhits_depth3_HF	0
          HcalDigiTask_amplitude_vs_simhits_depth4_HF	0
         HcalDigiTask_amplitude_vs_simhits_profile_HF	0
@@ -118,7 +118,7 @@
                       HcalDigiTask_ADC0_fC_depth4_HF	0
                HcalDigiTask_all_amplitudes_vs_bin_HF	0
                 HcalDigiTask_amplitude_vs_simhits_HF	0
-         HcalDigiTask_amplitude_vs_simhits_depth1_HF	1             HcalDigiTask_amplitude_vs_simhits_depth1_HF_gamma.gif	-1	-1	2D	NoStat	noChi2	NoLog	41	42	HF gamma signal amplitude (fC) vs SimHits (pe) depth 1
+         HcalDigiTask_amplitude_vs_simhits_depth1_HF	1             HcalDigiTask_amplitude_vs_simhits_depth1_HF_gamma.gif	-1	800	2D	NoStat	noChi2	NoLog	41	42	HF gamma signal amplitude (fC) vs SimHits (pe) depth 1
          HcalDigiTask_amplitude_vs_simhits_depth2_HF	1             HcalDigiTask_amplitude_vs_simhits_depth2_HF_gamma.gif	-1	-1	2D	NoStat	noChi2	NoLog	41	42	HF gamma signal amplitude (fC) vs SimHits (pe) depth 2
          HcalDigiTask_amplitude_vs_simhits_depth3_HF	0
          HcalDigiTask_amplitude_vs_simhits_depth4_HF	0
