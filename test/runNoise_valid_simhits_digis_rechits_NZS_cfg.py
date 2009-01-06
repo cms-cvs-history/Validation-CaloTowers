@@ -13,8 +13,9 @@ process.hcalRecoAnalyzer.hcalselector = 'noise'
 process.hcalRecoAnalyzer.ecalselector = 'no'
 process.hcalRecoAnalyzer.eventype = 'single'
 
-process.simHcalDigis.hbhe.level = -10000
-process.simHcalDigis.ho.level = -10000
-process.simHcalDigis.hf.level = -10000
+process.simHcalDigis.HBlevel = -1000
+process.simHcalDigis.HElevel = -1000
+process.simHcalDigis.HOlevel = -1000
+process.simHcalDigis.HFlevel = -1000
 
 process.p = cms.Path(process.VtxSmeared*process.g4SimHits*process.mix*process.simHcalUnsuppressedDigis*process.simHcalDigis*process.hbhereco*process.horeco*process.hfreco*process.hcalDigiAnalyzer*process.hcalRecoAnalyzer)
