@@ -3,6 +3,10 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("FULLPROD")
 process.load("Validation.CaloTowers.Production_cfi")
 
+process.load("Configuration.StandardSequences.GeometryECALHCAL_cff")
+process.load("Configuration.StandardSequences.MagneticField_cff")
+process.g4SimHits.UseMagneticField = False
+
 process.PoolSource.fileNames = ['file:/afs/cern.ch/cms/data/CMSSW/Validation/HcalHits/data/1_4_x/mc_pi50_etaphi+44.root', 'file:/afs/cern.ch/cms/data/CMSSW/Validation/HcalHits/data/1_4_x/mc_pi50_etaphi-44.root']
 
 process.USER = cms.OutputModule("PoolOutputModule",

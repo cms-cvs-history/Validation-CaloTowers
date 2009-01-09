@@ -3,6 +3,10 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("FULLPROD")
 process.load("Validation.CaloTowers.Production_noecal_cfi")
 
+process.load("Configuration.StandardSequences.GeometryHCAL_cff")
+process.load("Configuration.StandardSequences.MagneticField_cff")
+process.g4SimHits.UseMagneticField = False
+
 process.USER = cms.OutputModule("PoolOutputModule",
     outputCommands = cms.untracked.vstring('keep *', 
         'drop EBDataFramesSorted_*_*_*', 
