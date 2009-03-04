@@ -7,7 +7,11 @@ process.load("Configuration.StandardSequences.GeometryHCAL_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
 process.g4SimHits.UseMagneticField = False
 
-process.PoolSource.fileNames = ['file:/afs/cern.ch/cms/data/CMSSW/Validation/HcalHits/data/1_4_x/mc_nue.root']
+process.PoolSource.fileNames = ['file:/afs/cern.ch/cms/data/CMSSW/Validation/HcalHits/data/3_1_X/mc_nue.root']
+
+process.maxEvents = cms.untracked.PSet(
+    input = cms.untracked.int32(1000)
+)
 
 process.hcalDigiAnalyzer.outputFile = 'HcalDigisValidation_noise_NZS.root'
 process.hcalDigiAnalyzer.hcalselector = 'noise'
