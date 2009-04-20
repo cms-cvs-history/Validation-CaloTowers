@@ -25,6 +25,15 @@ process.hcalRecoAnalyzer.eventype = 'single'
 process.hcalTowerAnalyzer.outputFile = 'CaloTowersValidationHF.root'
 process.hcalTowerAnalyzer.hcalselector = 'HF'
 
-process.p = cms.Path(process.VtxSmeared*process.g4SimHits*process.mix* process.calDigi *  process.ecalLocalRecoSequence *  process.hbhereco*process.horeco*process.hfreco * process.caloTowersRec*process.hcalDigiAnalyzer*process.hcalRecoAnalyzer*process.hcalTowerAnalyzer)
-
+process.p = cms.Path(
+ process.VtxSmeared * process.g4SimHits * process.mix *
+ process.calDigi *
+ process.ecalPacker * process.hcalRawData *
+ process.ecalDigis * process.hcalDigis *
+ process.ecalGlobalUncalibRecHit * process.ecalDetIdToBeRecovered * process.ecalRecHit *
+ process.hbhereco * process.horeco * process.hfreco *
+ process.caloTowersRec *
+ process.hcalDigiAnalyzer *
+ process.hcalRecoAnalyzer *
+ process.hcalTowerAnalyzer )
 

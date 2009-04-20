@@ -43,7 +43,16 @@ process.USER = cms.OutputModule("PoolOutputModule",
     fileName = cms.untracked.string('validation_HF.root')
 )
 
-process.p = cms.Path(process.VtxSmeared*process.g4SimHits*process.mix*process.calDigi*process.calolocalreco*process.caloTowersRec)
+process.p = cms.Path(
+ process.VtxSmeared * process.g4SimHits * process.mix *
+ process.calDigi *
+ process.ecalPacker * process.hcalRawData *
+ process.ecalDigis * process.hcalDigis *
+ process.ecalGlobalUncalibRecHit * process.ecalDetIdToBeRecovered * process.ecalRecHit *
+ process.hbhereco * process.horeco * process.hfreco *
+ process.caloTowersRec )
+
+
 process.outpath = cms.EndPath(process.USER)
 process.PoolSource.fileNames = ['file:/afs/cern.ch/cms/data/CMSSW/Validation/HcalHits/data/1_4_x/mc_gamma_100_hf.root']
 
