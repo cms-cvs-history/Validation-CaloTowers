@@ -79,9 +79,9 @@ process.VtxSmeared.SigmaZ = 0.00001
 
 
 ### Special - CaloOnly ---------------------------------------------------
-process.ecalGlobalUncalibRecHit.EBdigiCollection = cms.InputTag("simEcalDigis","ebDigis")
-process.ecalGlobalUncalibRecHit.EEdigiCollection = cms.InputTag("simEcalDigis","eeDigis")
-process.ecalPreshowerRecHit.ESdigiCollection = cms.InputTag("simEcalPreshowerDigis") 
+process.ecalGlobalUncalibRecHit.EBdigiCollection = cms.InputTag("ecalDigis","ebDigis")
+process.ecalGlobalUncalibRecHit.EEdigiCollection = cms.InputTag("ecalDigis","eeDigis")
+process.ecalPreshowerRecHit.ESdigiCollection = cms.InputTag("ecalPreshowerDigis") 
 process.hbhereco.digiLabel = cms.InputTag("hcalDigis")
 process.horeco.digiLabel   = cms.InputTag("hcalDigis")
 process.hfreco.digiLabel   = cms.InputTag("hcalDigis")
@@ -93,6 +93,8 @@ process.ecalRecHit.recoverEEFE = cms.bool(False)
 
 process.g4SimHits.Generator.HepMCProductLabel = 'generator'
 process.p = cms.Path(
+ process.VtxSmeared *
+ process.g4SimHits * 
  process.mix *
  process.calDigi *
  process.ecalPacker *
