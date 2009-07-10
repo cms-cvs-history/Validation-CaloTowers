@@ -24,7 +24,7 @@ CaloTowersTask_energy_of_HCAL_component_of_tower_HE	0
 CaloTowersTask_map_energy_HE				0
 CaloTowersTask_map_energy_ECAL_HE			0
 CaloTowersTask_map_energy_HCAL_HE			0
-CaloTowersTask_number_of_fired_towers_HE		1	HE_CaloTowers_Ntowers_HE.gif		500.	-1	1D	Stat     Chi2       NoLog      2	1       HE CaloTowers number
+CaloTowersTask_number_of_fired_towers_HE		1	HE_CaloTowers_Ntowers_HE.gif		500.	700.	1D	Stat     Chi2       NoLog      2	1       HE CaloTowers number
 CaloTowersTask_phi_MET_HE				0
 CaloTowersTask_sum_of_energy_HCAL_vs_ECAL_HE		0
 
