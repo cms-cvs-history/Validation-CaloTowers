@@ -25,14 +25,20 @@ process.hcalTowerAnalyzer.outputFile = 'CaloTowersValidationHF.root'
 process.hcalTowerAnalyzer.hcalselector = 'HF'
 
 process.p = cms.Path(
- process.VtxSmeared * process.g4SimHits * process.mix *
+ process.VtxSmeared *
+ process.g4SimHits * 
+ process.mix *
  process.calDigi *
- process.ecalPacker * process.hcalRawData *
- process.ecalDigis * process.hcalDigis *
- process.ecalGlobalUncalibRecHit * process.ecalDetIdToBeRecovered * process.ecalRecHit *
- process.hbhereco * process.horeco * process.hfreco *
+ process.ecalPacker *
+ process.esDigiToRaw *
+ process.hcalRawData *
+ process.rawDataCollector *
+ process.ecalDigis * 
+ process.ecalPreshowerDigis * 
+ process.hcalDigis *
+ process.calolocalreco *
  process.caloTowersRec *
  process.hcalDigiAnalyzer *
  process.hcalRecoAnalyzer *
- process.hcalTowerAnalyzer )
-
+ process.hcalTowerAnalyzer
+)
