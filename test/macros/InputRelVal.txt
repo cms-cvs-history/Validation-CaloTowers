@@ -43,6 +43,10 @@ CaloTowersTask_number_of_fired_towers_HF		1	HF_CaloTowers_Ntowers_HF.gif		500.	-
 CaloTowersTask_phi_MET_HF				0
 CaloTowersTask_sum_of_energy_HCAL_vs_ECAL_HF		0
 
+                 HcalRecHitTask_RecHit_StatusWord_HB    1       HB_StatusWord.gif			-1	-1	1D      NoStat   noChi2 Log    41      42       HB status word
+                 HcalRecHitTask_RecHit_StatusWord_HE    1       HE_StatusWord.gif			-1	-1	1D      NoStat   noChi2 noLog  41      42       HE status word
+                 HcalRecHitTask_RecHit_StatusWord_HF    1       HF_StatusWord.gif			-1	1E-4	1D      NoStat   noChi2 Log    41      42       HF status word
+                 HcalRecHitTask_RecHit_StatusWord_HO    1       HO_StatusWord.gif			-1	-1	1D      NoStat   noChi2 noLog  41      42       HO status word
                  HcalRecHitTask_energy_of_rechits_HB	1	RecHits_energy_HB.gif			-1	-1	1D	Statrv	 Chi2	Log	2	1	HB RecHits energy (GeV)
                  HcalRecHitTask_energy_of_rechits_HE	1	RecHits_energy_HE.gif			-1	-1	1D	Statrv	 Chi2	Log	2	1	HE RecHits energy (GeV)
                  HcalRecHitTask_energy_of_rechits_HF	1	RecHits_energy_HF.gif			-1	-1	1D	Statrv	 Chi2	Log	2	1	HF RecHits energy (GeV)
@@ -134,3 +138,10 @@ CaloTowersTask_sum_of_energy_HCAL_vs_ECAL_HF		0
                                occupancy_vs_ieta_HF1	1	occupancy_vs_ieta_HF1.gif		-1	-1	1D	noStat	noChi2	NoLog	41	42	HF depth 1: occupancy vs ieta
                                occupancy_vs_ieta_HF2	1	occupancy_vs_ieta_HF2.gif		-1	-1	1D	noStat	noChi2	NoLog	41	42	HF depth 2: occupancy vs ieta
                                 occupancy_vs_ieta_HO	1	occupancy_vs_ieta_HO.gif		-1	0.21	1D	noStat	noChi2	NoLog	41	42	HO: occupancy vs ieta
+
+				     hLumiBlockCount	0	
+					  hRBXEnergy	1	RBX_energy.gif				500.	-1	1D      Statrv  Chi2    NoLog    2       1      RBX energy (GeV)
+			             hRBXEnergyType1	1       RBX_energy_type1.gif			400.	-1	1D      Statrv  Chi2    NoLog    2       1      RBX energy type 1 (GeV)
+                                     hRBXEnergyType2	1	RBX_energy_type2.gif			-1	-1	1D      Statrv  Chi2    NoLog    2       1      RBX energy type 2 (GeV)
+                                     hRBXEnergyType3	1	RBX_energy_type3.gif			-1	-1	1D      Statrv  Chi2    NoLog    2       1      RBX energy type 3 (GeV)
+                                           hRBXNHits	1	RBX_Nhits.gif				40.	-1	1D      Statrv  Chi2    NoLog    2       1      RBX number of hits
