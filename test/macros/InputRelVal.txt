@@ -94,14 +94,14 @@
                                                emap_HF1   0
                                                emap_HF2   0
                                                 emap_HO   0
-                                          emean_seq_HB1   1	                  emean_seq_HB1.gif	1	0	-1	0	-1	PRwide	noStat	noChi2	NoLog	41	42		HB depth 1: mean energy (GeV) sequential channels
-                                          emean_seq_HB2   1	                  emean_seq_HB2.gif	1	0	-1	0	-1	PRwide	noStat	noChi2	NoLog	41	42		HB depth 2: mean energy (GeV) sequential channels
-                                          emean_seq_HE1   1	                  emean_seq_HE1.gif	1	0	-1	0	-1	PRwide	noStat	noChi2	NoLog	41	42		HE depth 1: mean energy (GeV) sequential channels
-                                          emean_seq_HE2   1	                  emean_seq_HE2.gif	1	0	-1	0	-1	PRwide	noStat	noChi2	NoLog	41	42		HE depth 2: mean energy (GeV) sequential channels
-                                          emean_seq_HE3   1	                  emean_seq_HE3.gif	1	0	-1	0	-1	PRwide	noStat	noChi2	NoLog	41	42		HE depth 3: mean energy (GeV) sequential channels
-                                          emean_seq_HF1   1	                  emean_seq_HF1.gif	1	0	-1	0	-1	PRwide	noStat	noChi2	NoLog	41	42		HF depth 1: mean energy (GeV) sequential channels
-                                          emean_seq_HF2   1	                  emean_seq_HF2.gif	1	0	-1	0	-1	PRwide	noStat	noChi2	NoLog	41	42		HF depth 2: mean energy (GeV) sequential channels
-                                           emean_seq_HO   1	                   emean_seq_HO.gif	1	0	-1	0	-1	PRwide	noStat	noChi2	NoLog	41	42		HO: mean energy (GeV) vs ieta
+                                          emean_seq_HB1   0
+                                          emean_seq_HB2   0
+                                          emean_seq_HE1   0
+                                          emean_seq_HE2   0
+                                          emean_seq_HE3   0
+                                          emean_seq_HF1   0
+                                          emean_seq_HF2   0
+                                           emean_seq_HO   0
                                       emean_vs_ieta_HB1   1	              emean_vs_ieta_HB1.gif	1	0	-1	0	-1	PR	noStat	noChi2	NoLog	41	42		Mean energy vs ieta (GeV) HB depth1
                                       emean_vs_ieta_HB2   1	              emean_vs_ieta_HB2.gif	1	0	-1	0	-1	PR	noStat	noChi2	NoLog	41	42		Mean energy vs ieta (GeV) HB depth2
                                       emean_vs_ieta_HE1   1	              emean_vs_ieta_HE1.gif	1	0	-1	0	-1	PR	noStat	noChi2	NoLog	41	42		Mean energy vs ieta (GeV) HE depth1
