@@ -25,5 +25,6 @@ process.simHcalDigis.HBlevel = -1000
 process.simHcalDigis.HElevel = -1000
 process.simHcalDigis.HOlevel = -1000
 process.simHcalDigis.HFlevel = -1000
+process.simHcalDigis.useConfigZSvalues = 1
 
 process.p = cms.Path(process.VtxSmeared*process.g4SimHits*process.mix*process.simHcalUnsuppressedDigis*process.simHcalDigis*process.hbhereco*process.horeco*process.hfreco*process.hcalDigiAnalyzer*process.hcalRecoAnalyzer)

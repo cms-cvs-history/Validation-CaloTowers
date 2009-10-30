@@ -12,7 +12,7 @@ process.load("Configuration.StandardSequences.Reconstruction_cff")
 process.load('Configuration/StandardSequences/DigiToRaw_cff')
 process.load('Configuration/StandardSequences/RawToDigi_cff')
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = 'MC_31X_V3::All'
+process.GlobalTag.globaltag = 'MC_31X_V10::All'
 
 process.load("Configuration.StandardSequences.VtxSmearedGauss_cff")
 process.load("Configuration.StandardSequences.GeometryECALHCAL_cff")
@@ -71,7 +71,7 @@ process.simHcalDigis.HBlevel = -1000
 process.simHcalDigis.HElevel = -1000
 process.simHcalDigis.HOlevel = -1000
 process.simHcalDigis.HFlevel = -1000
-
+process.simHcalDigis.useConfigZSvalues = 1
 
 process.VtxSmeared.SigmaX = 0.00001
 process.VtxSmeared.SigmaY = 0.00001
