@@ -67,7 +67,6 @@ process.hcalTowerAnalyzer = cms.EDFilter("CaloTowersValidation",
 )
 
 #------------------------------------
-
 #process.simHcalDigis.HBlevel = -1000
 #process.simHcalDigis.HElevel = -1000
 #process.simHcalDigis.HOlevel = -1000
@@ -79,17 +78,27 @@ process.VtxSmeared.SigmaY = 0.00001
 process.VtxSmeared.SigmaZ = 0.00001
 
 
-### Special - CaloOnly ---------------------------------------------------
-process.ecalGlobalUncalibRecHit.EBdigiCollection = cms.InputTag("ecalDigis","ebDigis")
-process.ecalGlobalUncalibRecHit.EEdigiCollection = cms.InputTag("ecalDigis","eeDigis")
-process.ecalPreshowerRecHit.ESdigiCollection = cms.InputTag("ecalPreshowerDigis") 
-process.hbhereco.digiLabel = cms.InputTag("hcalDigis")
-process.horeco.digiLabel   = cms.InputTag("hcalDigis")
-process.hfreco.digiLabel   = cms.InputTag("hcalDigis")
-process.ecalRecHit.recoverEBIsolatedChannels = cms.bool(False)
-process.ecalRecHit.recoverEEIsolatedChannels = cms.bool(False)
-process.ecalRecHit.recoverEBFE = cms.bool(False)
-process.ecalRecHit.recoverEEFE = cms.bool(False)
+### Special - CaloOnly ------------------------------------
+
+#--- comes from DigiToRaw_cff.py
+process.ecalPacker.Label = 'simEcalDigis'
+process.ecalPacker.InstanceEB = 'ebDigis'
+process.ecalPacker.InstanceEE = 'eeDigis'
+process.ecalPacker.labelEBSRFlags = "simEcalDigis:ebSrFlags"
+process.ecalPacker.labelEESRFlags = "simEcalDigis:eeSrFlags"
+#
+#- hcalRawData (EventFilter/HcalRawToDigi/python/HcalDigiToRaw_cfi.py
+#                 uses simHcalDigis by default...
+
+
+#--- to force RAW->Digi 
+process.ecalDigis.InputLabel = 'rawDataCollector'
+process.hcalDigis.InputLabel = 'rawDataCollector'
+process.ecalPreshowerDigis.sourceTag = 'rawDataCollector'
+
+#--- calolocalreco = cms.Sequence(ecalLocalRecoSequence+hcalLocalRecoSequence)
+# RecoLocalCalo.Configuration.ecalLocalRecoSequence_cff
+# RecoLocalCalo.Configuration.hcalLocalReco_cff
 
 
 process.g4SimHits.Generator.HepMCProductLabel = 'generator'
