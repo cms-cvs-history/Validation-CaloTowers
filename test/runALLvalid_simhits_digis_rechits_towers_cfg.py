@@ -40,12 +40,12 @@ process.source = cms.Source("PoolSource",
 )
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10)
+    input = cms.untracked.int32(-1)
 )
 
 
 process.hcalDigiAnalyzer = cms.EDFilter("HcalDigiTester",
-    digiLabel = cms.InputTag("simHcalUnsuppressedDigis"),
+    digiLabel = cms.InputTag("hcalDigis"),
     outputFile = cms.untracked.string('HcalDigisValidation.root'),
     hcalselector = cms.untracked.string('all'),
     zside = cms.untracked.string('*')
@@ -71,6 +71,7 @@ process.hcalTowerAnalyzer = cms.EDFilter("CaloTowersValidation",
 #process.simHcalDigis.HElevel = -1000
 #process.simHcalDigis.HOlevel = -1000
 #process.simHcalDigis.HFlevel = -1000
+#process.simHcalDigis.useConfigZSvalues = 1
 
 
 process.VtxSmeared.SigmaX = 0.00001
