@@ -134,11 +134,10 @@
                                   occupancy_vs_ieta_HE3   1	          occupancy_vs_ieta_HE3.gif	1	0	-1	0	-1	1D	noStat	noChi2	NoLog	41	42		HE depth 3: occupancy vs ieta
                                   occupancy_vs_ieta_HF1   1	          occupancy_vs_ieta_HF1.gif	1	0	-1	0	-1	1D	noStat	noChi2	NoLog	41	42		HF depth 1: occupancy vs ieta
                                   occupancy_vs_ieta_HF2   1	          occupancy_vs_ieta_HF2.gif	1	0	-1	0	-1	1D	noStat	noChi2	NoLog	41	42		HF depth 2: occupancy vs ieta
-                                   occupancy_vs_ieta_HO   1	           occupancy_vs_ieta_HO.gif	1	0	-1	0	0.21	1D	noStat	noChi2	NoLog	41	42		HO: occupancy vs ieta
+                                   occupancy_vs_ieta_HO   1	           occupancy_vs_ieta_HO.gif	1	0	-1	0	0.35	1D	noStat	noChi2	NoLog	41	42		HO: occupancy vs ieta
                                         hLumiBlockCount   0
                                              hRBXEnergy   1	                     RBX_energy.gif	1	0	500	0	-1	1D	Statrv	Chi2	NoLog	2	1	      RBX energy (GeV)
                                         hRBXEnergyType1   1	               RBX_energy_type1.gif	1	0	400	0	-1	1D	Statrv	Chi2	NoLog	2	1	      RBX energy type 1 (GeV)
                                         hRBXEnergyType2   1	               RBX_energy_type2.gif	1	0	-1	0	-1	1D	Statrv	Chi2	NoLog	2	1	      RBX energy type 2 (GeV)
-                                        hRBXEnergyType3   1	               RBX_energy_type3.gif	5	0	-1	0	-1	1D	Statrv	Chi2	NoLog	2	1	      RBX energy type 3 (GeV)
+                                        hRBXEnergyType3   1	               RBX_energy_type3.gif	5	0	-1	0	50	1D	Statrv	Chi2	NoLog	2	1	      RBX energy type 3 (GeV)
                                               hRBXNHits   1	                      RBX_Nhits.gif	1	0	40	0	-1	1D	Statrv	Chi2	NoLog	2	1	      RBX number of hits
-                                                          1	                                   	1	0	40	0	-1					2	1	
