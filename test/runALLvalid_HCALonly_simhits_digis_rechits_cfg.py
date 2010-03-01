@@ -44,14 +44,14 @@ process.maxEvents = cms.untracked.PSet(
 )
 
 
-process.hcalDigiAnalyzer = cms.EDFilter("HcalDigiTester",
+process.hcalDigiAnalyzer = cms.EDAnalyzer("HcalDigiTester",
     digiLabel = cms.InputTag("simHcalUnsuppressedDigis"),
     outputFile = cms.untracked.string('HcalDigisValidation_HCALonly.root'),
     hcalselector = cms.untracked.string('all'),
     zside = cms.untracked.string('*')
 )
 
-process.hcalRecoAnalyzer = cms.EDFilter("HcalRecHitsValidation",
+process.hcalRecoAnalyzer = cms.EDAnalyzer("HcalRecHitsValidation",
     outputFile = cms.untracked.string('HcalRecHitsValidation_HCALonly.root'),
     eventype = cms.untracked.string('single'),
     mc = cms.untracked.string('yes'),
