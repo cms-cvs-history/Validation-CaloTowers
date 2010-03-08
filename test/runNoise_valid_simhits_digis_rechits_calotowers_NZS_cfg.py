@@ -12,7 +12,7 @@ process.load("Configuration.StandardSequences.Reconstruction_cff")
 process.load('Configuration/StandardSequences/DigiToRaw_cff')
 process.load('Configuration/StandardSequences/RawToDigi_cff')
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.GlobalTag.globaltag = 'MC_31X_V10::All'
+process.GlobalTag.globaltag = 'MC_3XY_V24::All'
 
 process.load("Configuration.StandardSequences.VtxSmearedGauss_cff")
 process.load("Configuration.StandardSequences.GeometryECALHCAL_cff")
@@ -29,8 +29,6 @@ process.options = cms.untracked.PSet(
 # Input source
 process.source = cms.Source("PoolSource",
     firstEvent = cms.untracked.uint32(1),
-    debugFlag = cms.untracked.bool(True),
-    debugVebosity = cms.untracked.uint32(2),
     noEventSort = cms.untracked.bool(True),	
     duplicateCheckMode = cms.untracked.string("noDuplicateCheck"),
     fileNames = cms.untracked.vstring(
@@ -45,13 +43,13 @@ process.maxEvents = cms.untracked.PSet(
 
 process.hcalDigiAnalyzer = cms.EDAnalyzer("HcalDigiTester",
     digiLabel = cms.InputTag("simHcalUnsuppressedDigis"),
-    outputFile = cms.untracked.string('HcalDigisValidationHB.root'),
-    hcalselector = cms.untracked.string('HB'),
+    outputFile = cms.untracked.string('HcalDigisValidation_NZS.root'),
+    hcalselector = cms.untracked.string('noise'),
     zside = cms.untracked.string('*')
 )
 
 process.hcalRecoAnalyzer = cms.EDAnalyzer("HcalRecHitsValidation",
-    outputFile = cms.untracked.string('HcalRecHitsValidation.root'),
+    outputFile = cms.untracked.string('HcalRecHitsValidation_NZS.root'),
     eventype = cms.untracked.string('single'),
     mc = cms.untracked.string('yes'),
     sign = cms.untracked.string('*'),
