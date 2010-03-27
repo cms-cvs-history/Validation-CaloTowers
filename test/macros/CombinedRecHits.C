@@ -185,7 +185,10 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
       //Set the colors, styles, titles, stat boxes and format axes for the histograms 
       if (StatSwitch != "Stat" && StatSwitch != "Statrv") ref_hist1[nh1]->SetStats(kFALSE);   
       
-      if (xAxisRange > 0) ref_hist1[nh1]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+      if (xAxisRange > 0){
+	ref_hist1[nh1]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+	val_hist1[nh1]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+      }
       if (yAxisRange > 0) ref_hist1[nh1]->SetMaximum(yAxisRange);
 
       if (xTitleCheck != "NoTitle") ref_hist1[nh1]->GetXaxis()->SetTitle(xAxisTitle);
@@ -269,7 +272,10 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
       //Set the colors, styles, titles, stat boxes and format axes for the histograms       
       if (StatSwitch != "Stat")	ref_hist2[nh2]->SetStats(kFALSE); 
 
-      if (xAxisRange > 0) ref_hist2[nh2]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+      if (xAxisRange > 0){
+	ref_hist2[nh2]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+	val_hist2[nh2]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+      }
       if (yAxisRange > 0) ref_hist2[nh2]->GetYaxis()->SetRangeUser(0.,yAxisRange);
      
       ref_hist2[nh2]->GetXaxis()->SetTitle(xAxisTitle);
@@ -370,7 +376,10 @@ void ProcessSubDetRecHit(TFile &ref_file, TFile &val_file, ifstream &recstr, con
       }
       ref_prof[npi]->GetXaxis()->SetTitle(xAxisTitle);
       
-      if (xAxisRange > 0) ref_prof[npi]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+      if (xAxisRange > 0){
+	ref_prof[npi]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+	val_prof[npi]->GetXaxis()->SetRangeUser(0.,xAxisRange);
+      }
       if (yAxisRange > 0) ref_prof[npi]->SetMaximum(yAxisRange);
 
       ref_prof[npi]->SetTitle("");
