@@ -45,26 +45,30 @@ duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
 
 
 process.hcalTowerAnalyzer = cms.EDAnalyzer("CaloTowersValidation",
-    outputFile = cms.untracked.string('CaloTowersValidationRelVal.root'),
-###    CaloTowerCollectionLabel = cms.untracked.InputTag('towerMaker'),
+    outputFile               = cms.untracked.string('CaloTowersValidationRelVal.root'),
     CaloTowerCollectionLabel = cms.untracked.InputTag('newtowerMaker'),
-    hcalselector = cms.untracked.string('all'),
-    mc = cms.untracked.string('no')
+    hcalselector             = cms.untracked.string('all'),
+    mc                       = cms.untracked.string('no')
 )
 
 process.hcalNoiseRates = cms.EDAnalyzer('NoiseRates',
-     rbxCollName = cms.string('hcalnoise'),
-     outputFile = cms.untracked.string('NoiseRatesRelVal.root'),
-     minRBXEnergy = cms.double(20.0),
-     minHitEnergy = cms.double(1.5)
+    outputFile   = cms.untracked.string('NoiseRatesRelVal.root'),
+    rbxCollName  = cms.untracked.InputTag('hcalnoise'),
+    minRBXEnergy = cms.untracked.double(20.0),
+    minHitEnergy = cms.untracked.double(1.5)
 )
 
 process.hcalRecoAnalyzer = cms.EDAnalyzer("HcalRecHitsValidation",
-    eventype = cms.untracked.string('multi'),
-    outputFile = cms.untracked.string('HcalRecHitValidationRelVal.root'),
-    ecalselector = cms.untracked.string('yes'),
-    mc = cms.untracked.string('no'),
-    hcalselector = cms.untracked.string('all')
+    outputFile                = cms.untracked.string('HcalRecHitValidationRelVal.root'),
+
+    HBHERecHitCollectionLabel = cms.untracked.InputTag("newhbhereco"),
+    HFRecHitCollectionLabel   = cms.untracked.InputTag("newhfreco"),
+    HORecHitCollectionLabel   = cms.untracked.InputTag("newhoreco"),
+
+    eventype                  = cms.untracked.string('multi'),
+    ecalselector              = cms.untracked.string('yes'),
+    hcalselector              = cms.untracked.string('all'),
+    mc                        = cms.untracked.string('no')
 )
 
 #-----------------------------------------------------------------------------
