@@ -27,19 +27,16 @@ process.maxEvents = cms.untracked.PSet(
 )
 
 #######################################################################
-#--- TWO-file approach, as both RAW  (for HCAL re-reco) and
-#                                RECO (for unchanged ECAL) is required 
-#
+#--- TWO-file approach, as both RAW  (for HCAL re-reco)    and
+#                               RECO (for unchanged ECAL)  are required 
+#######################################################################
 process.source = cms.Source("PoolSource",
 noEventSort = cms.untracked.bool(True),
 duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),   
-    #--- full set of GEN-SIM-RECO files -----------------------------------
-    fileNames = cms.untracked.vstring(
-
+    #--- full set of GEN-SIM-RECO RelVal files ----------------------------
      ),
-    #--- full set of GEN-SIM-DIGI-RAW(-HLTDEBUG) files --------------------
+    #--- full set of GEN-SIM-DIGI-RAW(-HLTDEBUG) RelVal files -------------
     secondaryFileNames = cms.untracked.vstring(   
-
      )
 )
 
@@ -53,7 +50,7 @@ process.hcalTowerAnalyzer = cms.EDAnalyzer("CaloTowersValidation",
 
 process.hcalNoiseRates = cms.EDAnalyzer('NoiseRates',
     outputFile   = cms.untracked.string('NoiseRatesRelVal.root'),
-    rbxCollName  = cms.untracked.InputTag('hcalnoise'),
+    rbxCollName  = cms.untracked.InputTag('newhcalnoise'),
     minRBXEnergy = cms.untracked.double(20.0),
     minHitEnergy = cms.untracked.double(1.5)
 )
@@ -64,7 +61,6 @@ process.hcalRecoAnalyzer = cms.EDAnalyzer("HcalRecHitsValidation",
     HBHERecHitCollectionLabel = cms.untracked.InputTag("newhbhereco"),
     HFRecHitCollectionLabel   = cms.untracked.InputTag("newhfreco"),
     HORecHitCollectionLabel   = cms.untracked.InputTag("newhoreco"),
-
     eventype                  = cms.untracked.string('multi'),
     ecalselector              = cms.untracked.string('yes'),
     hcalselector              = cms.untracked.string('all'),
@@ -72,7 +68,7 @@ process.hcalRecoAnalyzer = cms.EDAnalyzer("HcalRecHitsValidation",
 )
 
 #-----------------------------------------------------------------------------
-#                        HCAL re-reco 3-step procedure preparation
+#                        HCAL re-reco 4-step procedure preparation
 #-----------------------------------------------------------------------------
 #--- In case of DATA (re-reco) 
 #--- one might need to add some parameters replacements
@@ -102,13 +98,20 @@ process.newtowerMaker.hfInput = cms.InputTag("newhfreco")
 process.newtowerMaker.hbheInput = cms.InputTag("newhbhereco")
 process.newtowerMaker.hoInput = cms.InputTag("newhoreco")
 
+#(4) -------------------------  to get (NEW) RBX noise 
+# 
+from RecoMET.METProducers.hcalnoiseinfoproducer_cfi import *
+process.newhcalnoise = hcalnoise.clone()
+
+
 #--- Making re-reco and analysing
-#--- first 3 producers: HCAL+CaloTowers re-reco. 
+#--- first 4 producers: HCAL+CaloTowers(+RBX noise) re-reco. 
 #
 process.p = cms.Path(
 process.hcalDigis *
 process.newhcalLocalRecoSequence *
 process.newtowerMaker *
+process.newhcalnoise *
 #---
 process.hcalTowerAnalyzer * 
 process.hcalNoiseRates * 
