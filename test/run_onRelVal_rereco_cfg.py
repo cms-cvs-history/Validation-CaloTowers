@@ -34,9 +34,12 @@ process.source = cms.Source("PoolSource",
 noEventSort = cms.untracked.bool(True),
 duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),   
     #--- full set of GEN-SIM-RECO RelVal files ----------------------------
+    fileNames = cms.untracked.vstring(
+
      ),
     #--- full set of GEN-SIM-DIGI-RAW(-HLTDEBUG) RelVal files -------------
     secondaryFileNames = cms.untracked.vstring(   
+
      )
 )
 
@@ -102,7 +105,8 @@ process.newtowerMaker.hoInput = cms.InputTag("newhoreco")
 # 
 from RecoMET.METProducers.hcalnoiseinfoproducer_cfi import *
 process.newhcalnoise = hcalnoise.clone()
-
+process.newhcalnoise.recHitCollName = "newhbhereco"
+process.newhcalnoise.caloTowerCollName = "newtowerMaker"
 
 #--- Making re-reco and analysing
 #--- first 4 producers: HCAL+CaloTowers(+RBX noise) re-reco. 
