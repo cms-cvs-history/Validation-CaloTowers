@@ -47,18 +47,18 @@ process.VtxSmeared.SigmaZ = 0.00001
 #process.simHcalDigis.HElevel = 8
 #process.simHcalDigis.HFlevel = 9
 
-process.HcalSimHitsAnalyser = cms.EDFilter("HcalSimHitsValidation",
+process.HcalSimHitsAnalyser = cms.EDAnalyzer("HcalSimHitsValidation",
     outputFile = cms.untracked.string('HcalSimHitsValidation.root'),
 )   
 
-process.hcalDigiAnalyzer = cms.EDFilter("HcalDigiTester",
+process.hcalDigiAnalyzer = cms.EDAnalyzer("HcalDigiTester",
     digiLabel = cms.InputTag("simHcalUnsuppressedDigis"),
     outputFile = cms.untracked.string('HcalDigisValidationHB.root'),
     hcalselector = cms.untracked.string('HB'),
     zside = cms.untracked.string('*')
 )
 
-process.hcalRecoAnalyzer = cms.EDFilter("HcalRecHitsValidation",
+process.hcalRecoAnalyzer = cms.EDAnalyzer("HcalRecHitsValidation",
     outputFile = cms.untracked.string('output.root'),
     eventype = cms.untracked.string('single'),
     mc = cms.untracked.string('yes'),
@@ -67,7 +67,7 @@ process.hcalRecoAnalyzer = cms.EDFilter("HcalRecHitsValidation",
     ecalselector = cms.untracked.string('yes')
 )
 
-process.hcalTowerAnalyzer = cms.EDFilter("CaloTowersValidation",
+process.hcalTowerAnalyzer = cms.EDAnalyzer("CaloTowersValidation",
     outputFile = cms.untracked.string('CaloTowersValidationHB.root'),
     CaloTowerCollectionLabel = cms.untracked.string('towerMaker'), # noHO!
     hcalselector = cms.untracked.string('all')
