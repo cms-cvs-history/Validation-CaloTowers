@@ -28,7 +28,7 @@ process.hcalRecoAnalyzer = cms.EDFilter("HcalRecHitsValidation",
 )
 
 
-process.hcalTowerAnalyzer = cms.EDFilter("CaloTowersValidation",
+process.hcalTowerAnalyzer = cms.EDAnalyzer("CaloTowersValidation",
     outputFile = cms.untracked.string('CaloTowersValidationRelVal.root'),
     CaloTowerCollectionLabel = cms.untracked.string('towerMaker'),
     hcalselector = cms.untracked.string('all')
