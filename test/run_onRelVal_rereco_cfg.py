@@ -46,16 +46,22 @@ duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
 
 process.hcalTowerAnalyzer = cms.EDAnalyzer("CaloTowersValidation",
     outputFile               = cms.untracked.string('CaloTowersValidationRelVal.root'),
+
     CaloTowerCollectionLabel = cms.untracked.InputTag('newtowerMaker'),
     hcalselector             = cms.untracked.string('all'),
-    mc                       = cms.untracked.string('no')
+
+    mc                       = cms.untracked.string('no'),
+    useAllHistos             = cms.untracked.bool(False)                         
 )
 
 process.hcalNoiseRates = cms.EDAnalyzer('NoiseRates',
     outputFile   = cms.untracked.string('NoiseRatesRelVal.root'),
+
     rbxCollName  = cms.untracked.InputTag('newhcalnoise'),
     minRBXEnergy = cms.untracked.double(20.0),
-    minHitEnergy = cms.untracked.double(1.5)
+    minHitEnergy = cms.untracked.double(1.5),
+
+    useAllHistos = cms.untracked.bool(False)                         
 )
 
 process.hcalRecoAnalyzer = cms.EDAnalyzer("HcalRecHitsValidation",
@@ -64,10 +70,13 @@ process.hcalRecoAnalyzer = cms.EDAnalyzer("HcalRecHitsValidation",
     HBHERecHitCollectionLabel = cms.untracked.InputTag("newhbhereco"),
     HFRecHitCollectionLabel   = cms.untracked.InputTag("newhfreco"),
     HORecHitCollectionLabel   = cms.untracked.InputTag("newhoreco"),
+
     eventype                  = cms.untracked.string('multi'),
     ecalselector              = cms.untracked.string('yes'),
     hcalselector              = cms.untracked.string('all'),
-    mc                        = cms.untracked.string('no')
+
+    mc                        = cms.untracked.string('no'),
+    useAllHistos              = cms.untracked.bool(False)                                                                                                          
 )
 
 #-----------------------------------------------------------------------------
