@@ -2,6 +2,7 @@
 # Remaking HCAL RecHits and CaloTowers from RAW for validation  #
 #################################################################
 
+import os
 import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("RelValValidation")
@@ -15,15 +16,14 @@ process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 #--- and uncomment the 3d one with the actual tag to be set properly
 from Configuration.PyReleaseValidation.autoCond import autoCond
 process.GlobalTag.globaltag = autoCond['startup']
-#--process.GlobalTag.globaltag = 'MC_36Y_V4::All'
-
-
 
 process.load("DQMServices.Core.DQM_cfg")
 process.DQM.collectorHost = ''
 
+process.load("DQMServices.Components.MEtoEDMConverter_cfi")
+
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10)
+    input = cms.untracked.int32(-1)
 )
 
 #######################################################################
@@ -40,9 +40,14 @@ duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
     #--- full set of GEN-SIM-DIGI-RAW(-HLTDEBUG) RelVal files -------------
     secondaryFileNames = cms.untracked.vstring(   
 
-     )
+     ),
+    inputCommands = cms.untracked.vstring('keep *', 'drop *_MEtoEDMConverter_*_*')
 )
 
+process.FEVT = cms.OutputModule("PoolOutputModule",
+     outputCommands = cms.untracked.vstring('drop *', 'keep *_MEtoEDMConverter_*_*'),
+     fileName = cms.untracked.string("HcalValHarvestingEDM.root")
+)
 
 process.hcalTowerAnalyzer = cms.EDAnalyzer("CaloTowersValidation",
     outputFile               = cms.untracked.string('CaloTowersValidationRelVal.root'),
@@ -117,6 +122,30 @@ process.newhcalnoise = hcalnoise.clone()
 process.newhcalnoise.recHitCollName = "newhbhereco"
 process.newhcalnoise.caloTowerCollName = "newtowerMaker"
 
+#Extra step: adding client post-processing
+process.load('Configuration/StandardSequences/EDMtoMEAtRunEnd_cff')
+process.dqmSaver.referenceHandling = cms.untracked.string('all')
+
+cmssw_version = os.environ.get('CMSSW_VERSION','CMSSW_X_Y_Z')
+Workflow = '/HcalValidation/'+'Harvesting/'+str(cmssw_version)
+process.dqmSaver.workflow = Workflow
+
+process.calotowersClient = cms.EDAnalyzer("CaloTowersClient", 
+     outputFile = cms.untracked.string('CaloTowersHarvestingME.root'),
+     DQMDirName = cms.string("/") # root directory
+)
+
+process.noiseratesClient = cms.EDAnalyzer("NoiseRatesClient", 
+     outputFile = cms.untracked.string('NoiseRatesHarvestingME.root'),
+     DQMDirName = cms.string("/") # root directory
+)
+
+process.hcalrechitsClient = cms.EDAnalyzer("HcalRecHitsClient", 
+     outputFile = cms.untracked.string('HcalRecHitsHarvestingME.root'),
+     DQMDirName = cms.string("/") # root directory
+)
+
+
 #--- Making re-reco and analysing
 #--- first 4 producers: HCAL+CaloTowers(+RBX noise) re-reco. 
 #
@@ -128,4 +157,10 @@ process.newhcalnoise *
 #---
 process.hcalTowerAnalyzer * 
 process.hcalNoiseRates * 
-process.hcalRecoAnalyzer)
+process.hcalRecoAnalyzer *
+#Post processing
+process.calotowersClient *
+process.noiseratesClient *
+process.hcalrechitsClient *
+process.dqmSaver
+)
