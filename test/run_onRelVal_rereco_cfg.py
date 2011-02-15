@@ -99,13 +99,15 @@ from EventFilter.HcalRawToDigi.HcalRawToDigi_cfi import *
 
 #(2) -------------------------- to get (NEW) HCAL RecHits 
 #
+from RecoLocalCalo.HcalRecProducers.HBHEIsolatedNoiseReflagger_cfi import *
 from RecoLocalCalo.HcalRecProducers.HcalHitReconstructor_hbhe_cfi import *
 from RecoLocalCalo.HcalRecProducers.HcalHitReconstructor_ho_cfi import *
 from RecoLocalCalo.HcalRecProducers.HcalHitReconstructor_hf_cfi import *
-process.newhbhereco = hbhereco.clone()
-process.newhoreco   = horeco.clone()
-process.newhfreco   = hfreco.clone()
-process.newhcalLocalRecoSequence = cms.Sequence(process.newhbhereco+process.newhfreco+process.newhoreco)
+process.newhbheprereco = hbheprereco.clone()
+process.newhbhereco    = hbhereco.clone()
+process.newhoreco      = horeco.clone()
+process.newhfreco      = hfreco.clone()
+process.newhcalLocalRecoSequence = cms.Sequence(process.newhbheprereco+process.newhbhereco+process.newhfreco+process.newhoreco)
 
 #(3) -------------------------- to get (NEW) CaloTowers 
 #
@@ -154,11 +156,11 @@ process.hcalDigis *
 process.newhcalLocalRecoSequence *
 process.newtowerMaker *
 process.newhcalnoise *
-#---
+#--- analysis
 process.hcalTowerAnalyzer * 
 process.hcalNoiseRates * 
 process.hcalRecoAnalyzer *
-#Post processing
+#--- post processing
 process.calotowersClient *
 process.noiseratesClient *
 process.hcalrechitsClient *
