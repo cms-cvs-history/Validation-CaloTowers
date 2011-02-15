@@ -107,6 +107,7 @@ process.newhbheprereco = hbheprereco.clone()
 process.newhbhereco    = hbhereco.clone()
 process.newhoreco      = horeco.clone()
 process.newhfreco      = hfreco.clone()
+process.newhbhereco.hbheInput    = "newhbheprereco"
 process.newhcalLocalRecoSequence = cms.Sequence(process.newhbheprereco+process.newhbhereco+process.newhfreco+process.newhoreco)
 
 #(3) -------------------------- to get (NEW) CaloTowers 
