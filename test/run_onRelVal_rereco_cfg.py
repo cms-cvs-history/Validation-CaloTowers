@@ -6,7 +6,7 @@ import os
 import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("RelValValidation")
-process.load("Configuration.StandardSequences.Geometry_cff")
+process.load("Configuration.StandardSequences.GeometryDB_cff")
 process.load('Configuration.StandardSequences.RawToDigi_cff')
 process.load("Configuration.StandardSequences.Reconstruction_cff")
 
